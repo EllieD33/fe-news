@@ -4,6 +4,7 @@ import { fetchArticleById, fetchArticleComments } from "../utils/api";
 import { formatDate } from "../utils/helpers";
 import { Heading, Flex, Text, Box } from "@chakra-ui/react";
 import CommentCard from "./CommentCard";
+import VoteForm from "./VoteForm";
 
 const Story = () => {
     const [story, setStory] = useState({})
@@ -30,6 +31,7 @@ const Story = () => {
                     <Text>Votes: {`${story.votes}`}</Text>
                     <Text>Comments: {`${story.comment_count}`}</Text>
                 </Flex>
+                <VoteForm/>
             </Flex>
             <Flex as="section" direction="column" align="center" w="50%" >
                 <Heading tabIndex={0}  as="h3" fontSize="lg" >Comments</Heading>
