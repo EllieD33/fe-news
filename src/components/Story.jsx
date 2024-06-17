@@ -25,7 +25,7 @@ const Story = () => {
                 <Heading tabIndex={0} fontSize="2xl" textAlign="center" >{story && story.title}</Heading>
                 <Text>By <Box as="strong">{story.author}</Box> on <Box as="strong">{formatDate(story.created_at)}</Box></Text>
                 <Text>Category: {`${story.topic}`} </Text>
-                <Text my={2} maxW="80%" >{story.body}</Text>
+                <Text my={2} maxW="80%" minW="320px" >{story.body}</Text>
                 <Flex w="100%" justify="space-around" >
                     <Text>Votes: {`${story.votes}`}</Text>
                     <Text>Comments: {`${story.comment_count}`}</Text>
