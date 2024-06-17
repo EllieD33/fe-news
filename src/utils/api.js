@@ -5,3 +5,7 @@ const newsApi = axios.create ({ baseURL: "https://news-site-qstq.onrender.com/ap
 export const fetchAllArticles = () => {
     return newsApi.get("/articles").then(({ data }) => data);
 }
+
+export const fetchArticleById = (article_id) => {
+    return newsApi.get(`/articles/${article_id}`).then(({ data }) => data);
+}
