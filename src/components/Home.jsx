@@ -8,10 +8,8 @@ const Home = () => {
     const [stories, setStories] = useState([])
 
     useEffect(() => {
-        console.log('USE EFFECT')
         setIsLoading(true);
         fetchAllArticles().then(({ articles }) => {
-            console.log(articles, '<<< fetched articles');
             setStories(articles);
             setIsLoading(false);
         });
