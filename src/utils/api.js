@@ -9,3 +9,7 @@ export const fetchAllArticles = () => {
 export const fetchArticleById = (article_id) => {
     return newsApi.get(`/articles/${article_id}`).then(({ data }) => data);
 }
+
+export const fetchArticleComments = (article_id) => {
+    return newsApi.get(`/articles/${article_id}/comments`).then(({ data }) => data);
+}
