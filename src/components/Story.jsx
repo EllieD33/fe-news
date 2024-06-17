@@ -20,7 +20,7 @@ const Story = () => {
     },[])
 
     return (
-        <Flex as="main" tabIndex={0} direction="column" align="center" >
+        <Flex as="main" direction="column" align="center" >
             <Flex as="article" direction="column" m={4} maxW="70%" alignItems="center" >
                 <Heading tabIndex={0} fontSize="2xl" textAlign="center" >{story && story.title}</Heading>
                 <Text>By <Box as="strong">{story.author}</Box> on <Box as="strong">{formatDate(story.created_at)}</Box></Text>
@@ -31,8 +31,8 @@ const Story = () => {
                     <Text>Comments: {`${story.comment_count}`}</Text>
                 </Flex>
             </Flex>
-            <Flex as="section" direction="column" tabIndex={0} align="center" w="50%" >
-                <Heading as="h3" fontSize="lg" >Comments</Heading>
+            <Flex as="section" direction="column" align="center" w="50%" >
+                <Heading tabIndex={0}  as="h3" fontSize="lg" >Comments</Heading>
                 {
                     comments.map((comment) => (
                         <CommentCard key={comment.comment_id} comment={comment} />
