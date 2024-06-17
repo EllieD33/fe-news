@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchArticleById } from "../utils/api";
+import { fetchArticleById, fetchArticleComments } from "../utils/api";
 import { formatDate } from "../utils/helpers";
 import { Heading, Flex, Text, Box } from "@chakra-ui/react";
+import CommentCard from "./CommentCard";
 
 const Story = () => {
     const [story, setStory] = useState({})
+    const [comments, setComments] = useState([])
     const { article_id } = useParams();
 
     useEffect(() => {
         fetchArticleById(article_id).then(({ article }) => {
-            setStory(article)
+            setStory(article);
+        })
+        fetchArticleComments(article_id).then(({comments}) => {
+            setComments(comments);
         })
     },[])
 
@@ -26,8 +31,13 @@ const Story = () => {
                     <Text>Comments: {`${story.comment_count}`}</Text>
                 </Flex>
             </Flex>
-            <Flex as="section" tabIndex={0} >
+            <Flex as="section" direction="column" tabIndex={0} align="center" w="50%" >
                 <Heading as="h3" fontSize="lg" >Comments</Heading>
+                {
+                    comments.map((comment) => (
+                        <CommentCard key={comment.comment_id} comment={comment} />
+                    ))
+                }
             </Flex>
         </Flex>
     )
