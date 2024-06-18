@@ -15,7 +15,7 @@ const Header = () => {
                         icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                     />
             </Flex>
-            <Flex justify="center" mb={4} >
+            <Flex as="nav" justify="center" mb={4} >
                 <ChakraLink as={ReactRouterLink} to="/home" >
                     <Text>Home</Text>
                 </ChakraLink>
