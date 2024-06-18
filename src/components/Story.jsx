@@ -59,7 +59,7 @@ const Story = () => {
                 {commentsAreLoading && <Text>Loading comments...</Text>}
                 { comments.length === 0 ? <Text my={2} >No comments yet...</Text> :
                     comments.map((comment) => (
-                        <CommentCard key={comment.comment_id} comment={comment} />
+                        <CommentCard key={comment.comment_id} comment={comment} setComments={setComments} comments={comments}/>
                     ))
                 }
             </Flex>
