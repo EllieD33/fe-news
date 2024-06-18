@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { addComment } from "../utils/api";
 
-const NewCommentForm = ({ setComments, comments, article_id }) => {
+const NewCommentForm = ({ setComments, comments, article_id, setCommentFormIsVisible }) => {
     const { loggedInUser } = useContext(UserContext)
     const [ isLoading, setIsLoading] = useState(false);
     const [newComment, setNewComment] = useState('');
@@ -32,6 +32,7 @@ const NewCommentForm = ({ setComments, comments, article_id }) => {
             setNewComment('');
             setErrors({}); 
             setIsLoading(false);
+            setCommentFormIsVisible(false)
         }).catch((error) => {
             console.error('Error posting comment:', error);
             setComments(comments);
