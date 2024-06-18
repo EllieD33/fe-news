@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
-import PreviewCard from "./PreviewCard";
-import { fetchAllArticles } from "../utils/api"
 import { useState, useEffect } from "react";
+import { fetchAllArticles } from "../utils/api";
+import TopicFilter from "./TopicFilter";
+import PreviewCard from "./PreviewCard";
 
 const Topic = () => {
     const [stories, setStories] = useState([])
@@ -15,6 +16,7 @@ const Topic = () => {
 
     return (
         <section>
+            <TopicFilter/>
             <PreviewCard/>
         </section>
     )
