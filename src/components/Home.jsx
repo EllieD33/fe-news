@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchAllArticles } from "../utils/api";
 import PreviewCard from "./PreviewCard";
 import { Container, Flex, Heading, Text } from "@chakra-ui/react";
+import TopicFilter from "./TopicFilter";
 
 const Home = () => {
     const [ isLoading, setIsLoading] = useState(true)
@@ -24,6 +25,7 @@ const Home = () => {
             <section tabIndex={0}>
                 <Text>Welcome to NewsHub. Enjoy your time here, and remember: It's nice to be nice!!!</Text>
             </section>
+            <TopicFilter/>
             <Container as="section" tabIndex={0} m={4} py={4} border="2px" direction="column" justify="center" >
                 <Heading textAlign="center" fontSize="2xl">All stories</Heading>
                 {
