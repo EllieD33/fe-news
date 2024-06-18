@@ -1,6 +1,7 @@
 import { Card, Heading, Image, Text, Flex, Link as ChakraLink, Button, Icon } from "@chakra-ui/react"
 import { ArrowRightIcon } from "@chakra-ui/icons";
 import { Link as ReactRouterLink } from "react-router-dom";
+import { capitaliseFirstLetter } from '../utils/helpers';
 
 const PreviewCard = ({ article }) => {
     const article_id = article.article_id
@@ -13,7 +14,10 @@ const PreviewCard = ({ article }) => {
             <Flex alignItems="center" justify="space-between">
                 <Image src={article.article_img_url} alt="image related to article" borderRadius="5px" objectFit='cover' boxSize="100px" />
                 <Flex ml={2} direction="column" >
-                    <Text>In: {article.topic}</Text>
+                    <Flex>
+                        <Text mr={2} >In: </Text>
+                        <ChakraLink as={ReactRouterLink} to={`/topics/${article.topic}`} >{capitaliseFirstLetter(article.topic)}</ChakraLink>
+                    </Flex>
                     <Text>Authored by: {article.author}</Text>
                     <Text>Votes: <span>{article.votes}</span></Text>
                     <Text>Comments: <span>{article.comment_count}</span></Text>                    

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Heading, Flex, Text, Box, Button, Icon } from "@chakra-ui/react";
+import { useParams, Link as ReactRouterLink } from "react-router-dom";
+import { Heading, Flex, Text, Box, Button, Icon, Link as ChakraLink } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { fetchArticleById, fetchArticleComments } from "../utils/api";
-import { formatDate } from "../utils/helpers";
+import { formatDate, capitaliseFirstLetter } from "../utils/helpers";
 import CommentCard from "./CommentCard";
 import VoteForm from "./VoteForm";
 import NewCommentForm from "./NewCommentForm";
@@ -45,7 +45,10 @@ const Story = () => {
             <Flex as="article" direction="column" m={4} maxW="70%" alignItems="center" >
                 <Heading tabIndex={0} fontSize="2xl" textAlign="center" >{story && story.title}</Heading>
                 <Text>By <Box as="strong">{story.author}</Box> on <Box as="strong">{formatDate(story.created_at)}</Box></Text>
-                <Text>Category: {`${story.topic}`} </Text>
+                <Flex>
+                    <Text mr={2} >In: </Text>
+                    <ChakraLink as={ReactRouterLink} to={`/topics/${story.topic}`} >{capitaliseFirstLetter(story.topic)}</ChakraLink>
+                    </Flex>
                 <Text my={2} maxW="80%" minW="320px" >{story.body}</Text>
                 <Flex w="100%" justify="space-around" align="center" >
                     <VoteForm story={story} setStory={setStory} />

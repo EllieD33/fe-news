@@ -1,16 +1,18 @@
 import { Card, Heading, IconButton, Text, Flex } from "@chakra-ui/react"
 import { UserContext } from "../contexts/UserContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { formatDate, formatTime } from "../utils/helpers"
 import { DeleteIcon } from "@chakra-ui/icons";
 import { deleteComment } from "../utils/api";
 
 const CommentCard = ({ comment, setComments, comments }) => {
     const { loggedInUser } = useContext(UserContext)
+    const [isDeleting, setIsDeleting] = useState(false)
 
     const handleDelete = () => {
-        deleteComment(comment.comment_id)
-        setComments(comments.filter(comm => comm.comment_id !== comment.comment_id))
+        setIsDeleting(true);
+        deleteComment(comment.comment_id);
+        setComments(comments.filter(comm => comm.comment_id !== comment.comment_id));
     }
 
     return (
@@ -19,7 +21,7 @@ const CommentCard = ({ comment, setComments, comments }) => {
             <Text my={2} >{comment.body}</Text>
             <Flex justify="space-between" align="center" >
                 <Text>Votes: {comment.votes}</Text>
-                {loggedInUser.username === comment.author ? <IconButton aria-label="Delete comment" onClick={handleDelete} icon={<DeleteIcon size="24px" />} w="20px" colorScheme="teal" size="sm" /> : null}
+                {loggedInUser.username === comment.author ? <IconButton isDisabled={isDeleting} aria-label="Delete comment" onClick={handleDelete} icon={<DeleteIcon size="24px" />} w="20px" colorScheme="teal" size="sm" /> : null}
             </Flex>
         </Card>
     )

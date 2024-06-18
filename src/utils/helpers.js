@@ -11,3 +11,7 @@ export const formatTime = (str) => {
     const formattedTime = date.toLocaleTimeString("en-GB", options);
     return formattedTime;
 };
+
+export const capitaliseFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
