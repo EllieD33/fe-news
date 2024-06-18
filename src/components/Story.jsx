@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Heading, Flex, Text, Box, Button, Icon } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
 import { fetchArticleById, fetchArticleComments } from "../utils/api";
 import { formatDate } from "../utils/helpers";
-import { Heading, Flex, Text, Box } from "@chakra-ui/react";
 import CommentCard from "./CommentCard";
 import VoteForm from "./VoteForm";
+import NewCommentForm from "./NewCommentForm";
 
 const Story = () => {
-    const [ isLoading, setIsLoading] = useState(true)
-    const [story, setStory] = useState({})
-    const [comments, setComments] = useState([])
+    const [ isLoading, setIsLoading] = useState(true);
+    const [story, setStory] = useState({});
+    const [comments, setComments] = useState([]);
+    const [commentFormIsVisible, setCommentFormIsVisible] = useState(false);
+    const [showCommentFormButton, setShowCommentFormButton] = useState(true);
     const { article_id } = useParams();
 
     useEffect(() => {
@@ -17,10 +21,18 @@ const Story = () => {
             setStory(article);
             setIsLoading(false);
         })
+    },[])
+    
+    useEffect(() => {
         fetchArticleComments(article_id).then(({comments}) => {
             setComments(comments);
         })
-    },[])
+    }, [setComments])
+
+    const handleAddCommentClick = () => {
+        setCommentFormIsVisible(true)
+        setShowCommentFormButton(false)
+    }
 
     if (isLoading) {
         return <p className="loading" >Loading...</p>
@@ -40,6 +52,8 @@ const Story = () => {
             </Flex>
             <Flex as="section" direction="column" align="center" w="50%" >
                 <Heading tabIndex={0}  as="h3" fontSize="lg" >Comments</Heading>
+                {showCommentFormButton && <Button w="150px" leftIcon={<Icon as={AddIcon} />} size="sm" colorScheme="teal" onClick={handleAddCommentClick}>Add comment</Button>}
+                {commentFormIsVisible && <NewCommentForm setComments={setComments} comments={comments} article_id={story.article_id} />}
                 {
                     comments.map((comment) => (
                         <CommentCard key={comment.comment_id} comment={comment} />
