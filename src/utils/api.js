@@ -19,8 +19,5 @@ export const updateArticleVotes = (article_id, votes) => {
 }
 
 export const addComment = (article_id, username, body) => {
-    console.log(article_id)
-    console.log(username)
-    console.log(body)
     return newsApi.post(`/articles/${article_id}/comments`, { username: username, body: body}).then(({ data }) => data);
 }

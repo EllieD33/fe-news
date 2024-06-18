@@ -24,8 +24,6 @@ const NewCommentForm = ({ setComments, comments, article_id }) => {
         const tempComment = { comment_id: Date.now(), votes: 0, created_at: Date.now(), author: loggedInUser.username, body: newComment, article_id };
         setComments([tempComment, ...comments]);
 
-        console.log(newComment, '<<<newComment')
-
         addComment(article_id, loggedInUser.username, newComment).then((addedComment) => {
             const { comment } = addedComment;
             setComments((prevComments) => [comment, ...prevComments.filter(comm => comm.comment_id !== tempComment.comment_id)]);
