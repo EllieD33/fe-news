@@ -1,24 +1,32 @@
-import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchAllArticles } from "../utils/api";
-import TopicFilter from "./TopicFilter";
 import PreviewCard from "./PreviewCard";
+import { Heading, Container } from "@chakra-ui/react";
 
-const Topic = () => {
-    const [stories, setStories] = useState([])
-    const { topic_slug } = useParams();
+const Topic = ({ topic, setStories, stories }) => {
+    const [ isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        fetchAllArticles(topic_slug).then(() => {
-    
-        })
-    }, [])
+        setIsLoading(true);
+        fetchAllArticles(topic).then(({ articles }) => {
+            setStories(articles);
+            setIsLoading(false);
+        });
+    }, [topic])
+
+    if (isLoading) {
+        return <p className="loading" >Loading...</p>
+    }
 
     return (
-        <section>
-            <TopicFilter/>
-            <PreviewCard/>
-        </section>
+        <Container as="section" tabIndex={0} m={4} py={4} border="2px" direction="column" justify="center" >
+            <Heading textAlign="center" fontSize="2xl">{topic ? topic : 'All'} stories</Heading>
+            {
+                    stories.map((article) => (
+                        <PreviewCard key={article.article_id} article={article} />
+                    ))
+                }
+        </Container>
     )
 }
 

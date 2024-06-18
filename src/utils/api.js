@@ -6,8 +6,8 @@ export const fetchAllTopics = () => {
     return newsApi.get("/topics").then(({ data }) => data);
 }
 
-export const fetchAllArticles = (topic_slug) => {
-    return newsApi.get("/articles", { topic_slug }).then(({ data }) => data);
+export const fetchAllArticles = (slug) => {
+    return newsApi.get("/articles", { params: { topic: slug } }).then(({ data }) => data);
 }
 
 export const fetchArticleById = (article_id) => {

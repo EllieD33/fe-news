@@ -1,11 +1,10 @@
-import { FormControl, FormLabel, Select } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+import { FormControl, FormLabel, Select } from "@chakra-ui/react";
 import { fetchAllTopics } from "../utils/api";
-import { useNavigate } from "react-router-dom";
 
-const TopicFilter = () => {
-    const [topics, setTopics] = useState([])
-    const navigate = useNavigate();
+const TopicFilter = ({ onTopicChange }) => {
+    const [topics, setTopics] = useState([]);
+    const [selectedTopic, setSelectedTopic] = useState("");
 
     useEffect(() => {
         fetchAllTopics().then(({ topics }) => {
@@ -14,9 +13,10 @@ const TopicFilter = () => {
     }, [])
 
     const handleTopicChange = (event) => {
-        const selectedTopic = event.target.value;
-        if (selectedTopic !== "Select topic") {
-            navigate(`/topics/${selectedTopic}`);
+        const newTopic = event.target.value;
+        if (newTopic !== "Select topic") {
+            setSelectedTopic(newTopic);
+            onTopicChange(newTopic);
         }
     }
 
