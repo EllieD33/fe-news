@@ -13,3 +13,7 @@ export const fetchArticleById = (article_id) => {
 export const fetchArticleComments = (article_id) => {
     return newsApi.get(`/articles/${article_id}/comments`).then(({ data }) => data);
 }
+
+export const updateArticleVotes = (article_id, votes) => {
+    return newsApi.patch(`/articles/${article_id}`, {inc_votes: votes}).then(({ data }) => data);
+}
