@@ -5,6 +5,7 @@ import { addComment } from "../utils/api";
 
 const NewCommentForm = ({ setComments, comments, article_id }) => {
     const { loggedInUser } = useContext(UserContext)
+    const [ isLoading, setIsLoading] = useState(false);
     const [newComment, setNewComment] = useState('');
     const [errors, setErrors] = useState({});
 
@@ -23,12 +24,14 @@ const NewCommentForm = ({ setComments, comments, article_id }) => {
 
         const tempComment = { comment_id: Date.now(), votes: 0, created_at: Date.now(), author: loggedInUser.username, body: newComment, article_id };
         setComments([tempComment, ...comments]);
+        setIsLoading(true);
 
         addComment(article_id, loggedInUser.username, newComment).then((addedComment) => {
             const { comment } = addedComment;
             setComments((prevComments) => [comment, ...prevComments.filter(comm => comm.comment_id !== tempComment.comment_id)]);
             setNewComment('');
             setErrors({}); 
+            setIsLoading(false);
         }).catch((error) => {
             console.error('Error posting comment:', error);
             setComments(comments);
@@ -41,7 +44,7 @@ const NewCommentForm = ({ setComments, comments, article_id }) => {
             <FormLabel fontSize="sm" m={0} pl={1} >Enter your comment:</FormLabel>
             <Textarea name="commentTextInput" value={newComment} placeholder="Type your comment..." onChange={handleInputChange} />
             {errors.commentTextInput && <Text fontSize="sm" color="red">{errors.commentTextInput}</Text>}
-            <Button mt={1} type="submit" colorScheme="teal" size="sm" >Add</Button>
+            <Button mt={1} type="submit" colorScheme="teal" size="sm" >{isLoading ? 'Adding...' : 'Add'}</Button>
         </Box>
     )
 }
