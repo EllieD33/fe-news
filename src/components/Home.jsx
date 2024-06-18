@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
+import { useParams, useLocation } from "react-router-dom";
 import { Flex, Text } from "@chakra-ui/react";
 import { fetchAllArticles } from "../utils/api";
 import TopicFilter from "./TopicFilter";
 import Topic from "./Topic";
 
 const Home = () => {
+    const { slug } = useParams();
+    const location = useLocation(); 
     const [isLoading, setIsLoading] = useState(true);
-    const [topic, setTopic] = useState("");
+    const [topic, setTopic] = useState(slug);
     const [stories, setStories] = useState([]);
+
+    useEffect(() => {
+        setTopic(slug); 
+    }, [slug]);
 
     useEffect(() => {
         setIsLoading(true);
@@ -21,6 +28,8 @@ const Home = () => {
         setTopic(newTopic);
     };
 
+    const showTopicFilter = ['/home', '/', '/stories'].includes(location.pathname);
+
     if (isLoading) {
         return <p className="loading" >Loading...</p>
     }
@@ -30,7 +39,7 @@ const Home = () => {
             <section tabIndex={0}>
                 <Text>Welcome to NewsHub. Enjoy your time here, and remember: It's nice to be nice!!!</Text>
             </section>
-            <TopicFilter onTopicChange={handleTopicChange} />
+            {showTopicFilter && <TopicFilter onTopicChange={handleTopicChange} />}
             <Topic topic={topic} setStories={setStories} stories={stories} />
         </Flex>
     )
