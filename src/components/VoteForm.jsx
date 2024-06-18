@@ -7,6 +7,7 @@ import { updateArticleVotes } from "../utils/api";
 const VoteForm = ({ story, setStory }) => {
     const { loggedInUser } = useContext(UserContext);
     const [hasVoted, setHasVoted] = useState(false);
+    const [commentCount, setCommentCount] = useState(story.comment_count);
 
     const handleVote = (event) => {
         event.preventDefault();
@@ -28,7 +29,7 @@ const VoteForm = ({ story, setStory }) => {
         }));
         updateArticleVotes(story.article_id, votes).then((updatedStory) => {
             const { article } = updatedStory;
-            setStory(article);
+            setStory({...article, comment_count: commentCount});
             setHasVoted(true);
         }).catch((error) => {
             console.error('Error updating story votes:', error);

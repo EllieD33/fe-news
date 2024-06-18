@@ -8,11 +8,18 @@ import { deleteComment } from "../utils/api";
 const CommentCard = ({ comment, setComments, comments }) => {
     const { loggedInUser } = useContext(UserContext)
     const [isDeleting, setIsDeleting] = useState(false)
+    const [errors, setErrors] = useState({});
 
     const handleDelete = () => {
         setIsDeleting(true);
-        deleteComment(comment.comment_id);
-        setComments(comments.filter(comm => comm.comment_id !== comment.comment_id));
+        deleteComment(comment.comment_id).then(() => {
+            setErrors({})
+            setComments(comments.filter(comm => comm.comment_id !== comment.comment_id));
+        }).catch((error) => {
+            console.error('Error deleting comment:', error);
+            setIsDeleting(false);
+            setErrors({ deleteComment: "Couldn't delete comment. Please try again." })
+        });
     }
 
     return (
@@ -23,6 +30,7 @@ const CommentCard = ({ comment, setComments, comments }) => {
                 <Text>Votes: {comment.votes}</Text>
                 {loggedInUser.username === comment.author ? <IconButton isDisabled={isDeleting} aria-label="Delete comment" onClick={handleDelete} icon={<DeleteIcon size="24px" />} w="20px" colorScheme="teal" size="sm" /> : null}
             </Flex>
+                {errors.deleteComment && <Text fontSize="sm" color="red">{errors.deleteComment}</Text>}
         </Card>
     )
 }

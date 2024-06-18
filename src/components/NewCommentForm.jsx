@@ -36,7 +36,8 @@ const NewCommentForm = ({ setComments, comments, article_id, setCommentFormIsVis
         }).catch((error) => {
             console.error('Error posting comment:', error);
             setComments(comments);
-            alert('Failed to post comment. Please try again.');
+            setIsLoading(false);
+            setErrors({ commentTextInput: "Couldn't post comment. Please try again." })
         });
     }
 
