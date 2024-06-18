@@ -1,4 +1,4 @@
-import { IconButton,  } from "@chakra-ui/react";
+import { IconButton, Text, Flex } from "@chakra-ui/react";
 import { TiArrowDownOutline, TiArrowUpOutline } from "react-icons/ti";
 import { updateArticleVotes } from "../utils/api";
 
@@ -31,10 +31,11 @@ const VoteForm = ({ story, setStory }) => {
     }
 
     return (
-        <form>
+        <Flex as="form" align="center">
             <IconButton type="submit" onClick={handleVote} name="downVote" border="none" tabIndex={0} mr={1} icon={<TiArrowDownOutline size="24px" />} aria-label='down vote article' variant="outline" colorScheme="teal" size="sm" />
+            <Text>Votes: {`${story.votes}`}</Text>
             <IconButton type="submit" onClick={handleVote} name="upVote" border="none" tabIndex={0} ml={1} icon={<TiArrowUpOutline size="24px" />} aria-label='up vote article' variant="outline" colorScheme="teal" size="sm" />
-        </form>
+        </Flex>
     )
 }
 

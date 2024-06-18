@@ -33,11 +33,10 @@ const Story = () => {
                 <Text>By <Box as="strong">{story.author}</Box> on <Box as="strong">{formatDate(story.created_at)}</Box></Text>
                 <Text>Category: {`${story.topic}`} </Text>
                 <Text my={2} maxW="80%" minW="320px" >{story.body}</Text>
-                <Flex w="100%" justify="space-around" >
-                    <Text>Votes: {`${story.votes}`}</Text>
+                <Flex w="100%" justify="space-around" align="center" >
+                    <VoteForm story={story} setStory={setStory} />
                     <Text>Comments: {`${story.comment_count}`}</Text>
                 </Flex>
-                <VoteForm story={story} setStory={setStory} />
             </Flex>
             <Flex as="section" direction="column" align="center" w="50%" >
                 <Heading tabIndex={0}  as="h3" fontSize="lg" >Comments</Heading>
