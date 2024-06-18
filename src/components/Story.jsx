@@ -10,6 +10,7 @@ import NewCommentForm from "./NewCommentForm";
 
 const Story = () => {
     const [ isLoading, setIsLoading] = useState(true);
+    const [ commentsAreLoading, setCommentsAreLoading] = useState(true);
     const [story, setStory] = useState({});
     const [comments, setComments] = useState([]);
     const [commentFormIsVisible, setCommentFormIsVisible] = useState(false);
@@ -26,6 +27,7 @@ const Story = () => {
     useEffect(() => {
         fetchArticleComments(article_id).then(({comments}) => {
             setComments(comments);
+            setCommentsAreLoading(false);
         })
     }, [setComments])
 
@@ -54,7 +56,8 @@ const Story = () => {
                 <Heading tabIndex={0}  as="h3" fontSize="lg" >Comments</Heading>
                 {showCommentFormButton && <Button w="150px" leftIcon={<Icon as={AddIcon} />} size="sm" colorScheme="teal" onClick={handleAddCommentClick}>Add comment</Button>}
                 {commentFormIsVisible && <NewCommentForm setComments={setComments} comments={comments} article_id={story.article_id} setCommentFormIsVisible={setCommentFormIsVisible} />}
-                {
+                {commentsAreLoading && <Text>Loading comments...</Text>}
+                { comments.length === 0 ? <Text my={2} >No comments yet...</Text> :
                     comments.map((comment) => (
                         <CommentCard key={comment.comment_id} comment={comment} />
                     ))
