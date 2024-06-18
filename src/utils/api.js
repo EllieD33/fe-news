@@ -21,3 +21,7 @@ export const updateArticleVotes = (article_id, votes) => {
 export const addComment = (article_id, username, body) => {
     return newsApi.post(`/articles/${article_id}/comments`, { username: username, body: body}).then(({ data }) => data);
 }
+
+export const deleteComment = (comment_id) => {
+    return newsApi.delete(`/comments/${comment_id}`)
+}
