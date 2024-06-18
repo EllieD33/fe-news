@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FormControl, FormLabel, Select } from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Select, Flex } from "@chakra-ui/react";
 import { fetchAllTopics } from "../utils/api";
 
 const TopicFilter = ({ onTopicChange }) => {
@@ -20,13 +20,18 @@ const TopicFilter = ({ onTopicChange }) => {
         }
     }
 
+    const handleClear = () => {
+        setSelectedTopic("");
+        onTopicChange("");
+    }
+
     return (
-        <form>
+        <Flex as="form" align="flex-end" >
             <FormControl>
                 <FormLabel m={0} >
                     Filter by category:
                 </FormLabel>
-                <Select onChange={handleTopicChange}>
+                <Select borderRadius="5px" size="sm" onChange={handleTopicChange}>
                     <option>Select topic</option>
                     {topics && 
                         topics.map((topic) => (
@@ -35,7 +40,8 @@ const TopicFilter = ({ onTopicChange }) => {
                     }
                 </Select>
             </FormControl>
-        </form>
+            <Button onClick={handleClear} size="sm" ml={2} colorScheme="teal" variant="outline">Clear</Button>
+        </Flex>
     )
 }
 
