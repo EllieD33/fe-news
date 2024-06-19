@@ -32,8 +32,8 @@ const Home = () => {
     
     return (
         <Flex as="main" direction="column" alignItems="center">
-            <section tabIndex={0}>
-                <Text>Welcome to NewsHub. Enjoy your time here, and remember: It's nice to be nice!!!</Text>
+            <section >
+                <Text mx={2} textAlign="center" >Welcome to NewsHub. Enjoy your time here, and remember: It's nice to be nice!!!</Text>
             </section>
             {isLoading ? <Spinner/> :
             (

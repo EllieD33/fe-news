@@ -17,8 +17,8 @@ const Header = () => {
 
     return (
         <header>
-            <Flex justify="space-between">
-                <Heading  as="h1">NewsHub</Heading>
+            <Flex m={2} justify="space-between" >
+                <Heading as="h1">NewsHub</Heading>
                 <IconButton
                         ml={2}
                         onClick={toggleColorMode}
@@ -26,7 +26,7 @@ const Header = () => {
                         icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                     />
             </Flex>
-            <Flex as="nav" justify="center" mb={4} >
+            <Flex wrap="wrap" as="nav" justify="center" mb={4} >
                 <ChakraLink as={ReactRouterLink} to="/home" >
                     <Text>Home</Text>
                 </ChakraLink>
