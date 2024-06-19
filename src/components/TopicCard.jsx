@@ -1,5 +1,5 @@
-import { Flex, Heading, Text, Card, LinkBox, LinkOverlay } from "@chakra-ui/react"
 import { Link as ReactRouterLink } from "react-router-dom"
+import { Flex, Heading, Text, Card, LinkBox, LinkOverlay } from "@chakra-ui/react"
 import { capitaliseFirstLetter } from "../utils/helpers"
 
 const TopicCard = ({ topic, description }) => {
