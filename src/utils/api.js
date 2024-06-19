@@ -6,7 +6,7 @@ export const fetchAllTopics = () => {
     return newsApi.get("/topics").then(({ data }) => data);
 }
 
-export const fetchAllArticles = (slug, sortBy = 'votes', sortOrder = 'DESC') => {
+export const fetchAllArticles = (slug, sortBy, sortOrder ) => {
     return newsApi.get("/articles", { params: { topic: slug, sort_by: sortBy, order: sortOrder  } }).then(({ data }) => data);
 }
 

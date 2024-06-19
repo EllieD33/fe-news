@@ -9,14 +9,16 @@ import SortForm from "./SortForm";
 const Topic = ({ topic, setStories, stories }) => {
     const [ isLoading, setIsLoading] = useState(true);
     const [searchParams, setSearchParams] = useSearchParams();
+    const sortBy = searchParams.get('sortBy') || 'created_at';
+    const sortOrder = searchParams.get('sortOrder') || 'DESC';
 
     useEffect(() => {
         setIsLoading(true);
-        fetchAllArticles(topic).then(({ articles }) => {
+        fetchAllArticles(topic, sortBy, sortOrder).then(({ articles }) => {
             setStories(articles);
             setIsLoading(false);
         });
-    }, [topic])
+    }, [topic, sortBy, sortOrder])
 
     if (isLoading) {
         return <p className="loading" >Loading...</p>
