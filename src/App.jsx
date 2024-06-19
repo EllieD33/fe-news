@@ -5,7 +5,7 @@ import './App.css'
 import Header from './components/Header'
 import Home from './components/Home';
 import Story from './components/Story';
-import Topic from './components/Topic'
+import PageNotFound from './components/PageNotFound';
 
 function App() {
   const { setLoggedInUser } = useContext(UserContext);
@@ -23,6 +23,7 @@ function App() {
         <Route path="/stories" element={<Home />} />
         <Route path="/stories/:article_id" element={<Story />} />
         <Route path="/topics/:slug" element={<Home />} />
+        <Route path="*" element={<PageNotFound/>} />
       </Routes>
     </>
   )
