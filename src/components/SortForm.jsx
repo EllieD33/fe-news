@@ -2,7 +2,7 @@ import { Flex, IconButton, Select } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaSortAmountDown, FaSortAmountUp } from "react-icons/fa";
 
-const SortForm = () => {
+const SortForm = ({ setSearchParams }) => {
     const [sortDirection, setSortDirection] = useState('DESC')
     const [sortBy, setSortBy] = useState('Date')
 
