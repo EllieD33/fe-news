@@ -1,7 +1,7 @@
 import { Card, Heading, Image, Text, Flex, Link as ChakraLink, Button, Icon } from "@chakra-ui/react"
 import { ArrowRightIcon } from "@chakra-ui/icons";
 import { Link as ReactRouterLink } from "react-router-dom";
-import { capitaliseFirstLetter } from '../utils/helpers';
+import { capitaliseFirstLetter, formatDate } from '../utils/helpers';
 
 const PreviewCard = ({ article }) => {
     const article_id = article.article_id
@@ -19,6 +19,7 @@ const PreviewCard = ({ article }) => {
                         <ChakraLink as={ReactRouterLink} to={`/topics/${article.topic}`} >{capitaliseFirstLetter(article.topic)}</ChakraLink>
                     </Flex>
                     <Text>Authored by: {article.author}</Text>
+                    <Text>On: {formatDate(article.created_at)}</Text>
                     <Text>Votes: <span>{article.votes}</span></Text>
                     <Text>Comments: <span>{article.comment_count}</span></Text>                    
                 </Flex>
