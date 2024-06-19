@@ -8,8 +8,8 @@ const SortForm = ({ setSearchParams }) => {
     const initialSortOrder = searchParams.get('sortOrder') || 'DESC';
     const initialSortBy = searchParams.get('sortBy') || 'created_at';
 
-    const [sortOrder, setSortOrder] = useState('DESC')
-    const [sortBy, setSortBy] = useState('created_at')
+    const [sortOrder, setSortOrder] = useState(initialSortOrder)
+    const [sortBy, setSortBy] = useState(initialSortBy)
 
     useEffect(() => {
         setSortOrder(initialSortOrder);
@@ -19,7 +19,8 @@ const SortForm = ({ setSearchParams }) => {
     const handleSortChange = (event) => {
         const newSortBy = event.target.value;
         setSortBy(newSortBy);
-        setSearchParams({ sortBy: newSortBy, sortOrder });
+        setSortOrder('DESC');
+        setSearchParams({ sortBy: newSortBy, sortOrder: 'DESC' });
     }
 
     const handleOrderChange = () => {
@@ -30,7 +31,7 @@ const SortForm = ({ setSearchParams }) => {
 
     return (
         <Flex as="form" maxW="150px" >
-            <Select onChange={handleSortChange} size="sm" borderRadius="5px" >
+            <Select onChange={handleSortChange} size="sm" value={sortBy} borderRadius="5px" >
                 <option name="created_at" value="created_at">Date</option>
                 <option name="comment_count" value="comment_count">Comments</option>
                 <option name="votes" value="votes">Votes</option>
