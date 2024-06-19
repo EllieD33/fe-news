@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Heading, Container, Flex } from "@chakra-ui/react";
+import { Heading, Container, Flex, Spinner } from "@chakra-ui/react";
 import { fetchAllArticles } from "../utils/api";
 import { capitaliseFirstLetter } from '../utils/helpers';
 import PreviewCard from "./PreviewCard";
@@ -20,21 +20,19 @@ const Topic = ({ topic, setStories, stories }) => {
         });
     }, [topic, sortBy, sortOrder])
 
-    if (isLoading) {
-        return <p className="loading" >Loading...</p>
-    }
-
     return (
         <Container as="section" tabIndex={0} m={4} py={4} border="2px" direction="column" justify="center" >
             <Flex justify="space-between" align="center">
                 <Heading textAlign="center" fontSize="2xl">{topic ? capitaliseFirstLetter(topic) : 'All'} stories</Heading>
                 <SortForm setSearchParams={setSearchParams} />
             </Flex>
-            {
+            <Flex direction="column" align="center">
+                {isLoading ? <Spinner/> :
                     stories.map((article) => (
                         <PreviewCard key={article.article_id} article={article} />
                     ))
                 }
+            </Flex>
         </Container>
     )
 }

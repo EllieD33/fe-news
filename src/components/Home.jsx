@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Spinner, Text } from "@chakra-ui/react";
 import { fetchAllArticles } from "../utils/api";
 import TopicFilter from "./TopicFilter";
 import Topic from "./Topic";
@@ -29,18 +29,19 @@ const Home = () => {
     };
 
     const showTopicFilter = ['/home', '/', '/stories'].includes(location.pathname);
-
-    if (isLoading) {
-        return <p className="loading" >Loading...</p>
-    }
     
     return (
         <Flex as="main" direction="column" alignItems="center">
             <section tabIndex={0}>
                 <Text>Welcome to NewsHub. Enjoy your time here, and remember: It's nice to be nice!!!</Text>
             </section>
-            {showTopicFilter && <TopicFilter onTopicChange={handleTopicChange} />}
-            <Topic topic={topic} setStories={setStories} stories={stories} />
+            {isLoading ? <Spinner/> :
+            (
+                <>
+                    {showTopicFilter && <TopicFilter onTopicChange={handleTopicChange} />}
+                    <Topic topic={topic} setStories={setStories} stories={stories} />
+                </>
+            )}
         </Flex>
     )
 }
