@@ -7,6 +7,7 @@ import { formatDate, capitaliseFirstLetter } from "../utils/helpers";
 import CommentCard from "./CommentCard";
 import VoteForm from "./VoteForm";
 import NewCommentForm from "./NewCommentForm";
+import PageNotFound from "./PageNotFound"
 
 const Story = () => {
     const [ isLoading, setIsLoading] = useState(true);
@@ -15,12 +16,16 @@ const Story = () => {
     const [comments, setComments] = useState([]);
     const [commentFormIsVisible, setCommentFormIsVisible] = useState(false);
     const [showCommentFormButton, setShowCommentFormButton] = useState(true);
+    const [dataFetchFailed, setDataFetchFailed] = useState(false);
     const { article_id } = useParams();
 
     useEffect(() => {
         fetchArticleById(article_id).then(({ article }) => {
             setStory(article);
             setIsLoading(false);
+        }).catch((error) => {
+            setIsLoading(false)
+            setDataFetchFailed(true)
         })
     },[])
     
@@ -34,6 +39,10 @@ const Story = () => {
     const handleAddCommentClick = () => {
         setCommentFormIsVisible(true)
         setShowCommentFormButton(false)
+    }
+
+    if(dataFetchFailed){
+        return <PageNotFound/>
     }
 
     return (

@@ -18,7 +18,7 @@ const Header = () => {
     return (
         <header>
             <Flex m={2} justify="space-between" >
-                <Heading as="h1">NewsHub</Heading>
+                <Heading as="h1" textAlign="center" flex="1">NewsHub</Heading>
                 <IconButton
                         ml={2}
                         onClick={toggleColorMode}

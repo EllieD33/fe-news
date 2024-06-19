@@ -6,7 +6,7 @@ import { capitaliseFirstLetter, formatDate } from '../utils/helpers';
 const PreviewCard = ({ article }) => {
     const article_id = article.article_id
     return (
-        <Card as="article" minW="320px" tabIndex={0} m={4} p={2} transition="all 0.2s" _hover={{ transform: "translateY(-4px)", shadow: "lg", color: "teal" }} >
+        <Card as="article" w={[300, 400, 500]} tabIndex={0} m={4} p={2} transition="all 0.2s" _hover={{ transform: "translateY(-4px)", shadow: "lg", color: "teal" }} >
             <Heading fontSize="lg" as="h3">{article.title}</Heading>
             <Flex alignItems="center" justify="space-between" flexDirection={{ base: "column", md: "row" }}>
                 <Flex w="100%" align="center">

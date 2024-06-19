@@ -5,10 +5,11 @@ import { fetchAllArticles } from "../utils/api";
 import { capitaliseFirstLetter } from '../utils/helpers';
 import PreviewCard from "./PreviewCard";
 import SortForm from "./SortForm";
+import PageNotFound from "./PageNotFound"
 
 const Topic = ({ topic, setStories, stories }) => {
     const [isLoading, setIsLoading] = useState(true);
-    const [errors, setErrors] = useState(null)
+    const [dataFetchFailed, setDataFetchFailed] = useState(false)
     const [searchParams, setSearchParams] = useSearchParams();
     const sortBy = searchParams.get('sortBy') || 'created_at';
     const sortOrder = searchParams.get('sortOrder') || 'DESC';
@@ -18,16 +19,14 @@ const Topic = ({ topic, setStories, stories }) => {
         fetchAllArticles(topic, sortBy, sortOrder).then(({ articles }) => {
             setStories(articles);
             setIsLoading(false);
-            setErrors(null)
         }).catch((error) => {
-            setIsLoading(false);
-            console.error('Error fetching data:', error)
-            setErrors({ FetchFail: "Unable to load stories at this time. Please try again later."})
+            setIsLoading(false)
+            setDataFetchFailed(true)
         });
     }, [topic, sortBy, sortOrder])
 
-    if (errors) {
-        return <div>Error: {errors.FetchFail}</div>;
+    if(dataFetchFailed){
+        return <PageNotFound/>
     }
 
     return (

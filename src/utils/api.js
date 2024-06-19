@@ -9,13 +9,16 @@ export const fetchAllTopics = () => {
 export const fetchAllArticles = (slug, sortBy, sortOrder ) => {
     return newsApi.get("/articles", { params: { topic: slug, sort_by: sortBy, order: sortOrder  } }).then(({ data }) => data)
     .catch(error => {
-        console.error('Error fetching articles:', error);
         throw error;
     });
 }
 
 export const fetchArticleById = (article_id) => {
-    return newsApi.get(`/articles/${article_id}`).then(({ data }) => data);
+    return newsApi.get(`/articles/${article_id}`).then(({ data }) => data).catch(
+        error => {
+            throw error;
+        }
+    );
 }
 
 export const fetchArticleComments = (article_id) => {
