@@ -4,7 +4,7 @@ import PreviewCard from "../cards/PreviewCard"
 const FeaturedStories = ({ title, subtitle, stories, isLoading }) => {
     return (
         <Flex m={4} as="section" direction="column" align="center">
-            <Heading as="h3">{title}</Heading>
+            <Heading as="h3" fontSize="2xl" >{title}</Heading>
             <Text>{subtitle}</Text>
             <Flex direction="column" align="center">
                 {isLoading ? <Spinner/> :

@@ -70,7 +70,7 @@ const Story = () => {
                         maxW="70%"
                         alignItems="center"
                     >
-                        <Heading tabIndex={0} fontSize="2xl" textAlign="center">
+                        <Heading tabIndex={0} fontSize="3xl" textAlign="center">
                             {story && story.title}
                         </Heading>
                         <Text>

@@ -6,7 +6,7 @@ const theme = extendTheme({
             svg: {
                 color:
                     props.colorMode === "dark" ? "whiteAlpha.900" : "teal.700",
-            },
+            }
         }),
     },
     components: {

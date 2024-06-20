@@ -10,7 +10,7 @@ const PreviewCard = ({ article }) => {
     const article_id = article.article_id
     return (
         <Card as="article" w={[300, 400, 500]} tabIndex={0} m={4} p={2} transition="all 0.2s" _hover={{ transform: "translateY(-4px)", shadow: "lg"}} >
-            <Heading fontSize="lg" as="h3">{article.title}</Heading>
+            <Heading fontSize="lg" as="h4">{article.title}</Heading>
             <Flex alignItems="center" justify="space-between" flexDirection={{ base: "column", md: "row" }}>
                 <Flex w="100%" align="center">
                     <Image src={article.article_img_url} alt="image related to article" borderRadius="5px" objectFit='cover' boxSize="100px" />

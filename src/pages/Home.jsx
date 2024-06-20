@@ -31,8 +31,8 @@ const Home = () => {
     return (
         <Flex id="main" as="main" pt={4} direction="column" alignItems="center" >
             <section >
-                <Heading>Welcome to NewsHub</Heading>
-                <Text mx={2} textAlign="center" >Enjoy your time here, and remember: It's nice to be nice!!!</Text>
+                <Heading fontSize="3xl" textAlign="center">Welcome to NewsHub</Heading>
+                <Text mx={2} textAlign="center">Enjoy your time here, and remember: It's nice to be nice!!!</Text>
             </section>
             <Flex wrap="wrap" align="center" justify="center">
                 <FeaturedStories title="What's new" subtitle="Recently added stories" stories={recentStories} isLoading={isLoading} />
