@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Heading, Container, Flex, Spinner } from "@chakra-ui/react";
-import { fetchAllArticles } from "../utils/api";
-import { capitaliseFirstLetter } from '../utils/helpers';
-import PreviewCard from "./PreviewCard";
-import SortForm from "./SortForm";
-import PageNotFound from "./PageNotFound"
+import { fetchAllArticles } from "../../utils/api";
+import { capitaliseFirstLetter } from '../../utils/helpers';
+import PreviewCard from "../cards/PreviewCard";
+import SortForm from "../forms/SortForm";
+import PageNotFound from "../PageNotFound"
 
 const Topic = ({ topic, setStories, stories }) => {
     const [isLoading, setIsLoading] = useState(true);

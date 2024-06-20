@@ -1,5 +1,5 @@
 import { Flex, Heading, Text, Spinner } from "@chakra-ui/react"
-import PreviewCard from "./PreviewCard"
+import PreviewCard from "../cards/PreviewCard"
 
 const FeaturedStories = ({ title, subtitle, stories, isLoading }) => {
     return (

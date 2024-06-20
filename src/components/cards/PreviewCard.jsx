@@ -4,7 +4,7 @@ import { FaRegCommentAlt,  } from "react-icons/fa";
 import { TiArrowDownOutline, TiArrowUpOutline, TiMinusOutline } from "react-icons/ti";
 
 import { Link as ReactRouterLink } from "react-router-dom";
-import { capitaliseFirstLetter, formatDate } from '../utils/helpers';
+import { capitaliseFirstLetter, formatDate } from '../../utils/helpers';
 
 const PreviewCard = ({ article }) => {
     const article_id = article.article_id

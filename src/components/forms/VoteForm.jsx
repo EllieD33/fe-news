@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { IconButton, Text, Flex } from "@chakra-ui/react";
 import { TiArrowDownOutline, TiArrowUpOutline } from "react-icons/ti";
-import { UserContext } from "../contexts/UserContext";
-import { updateArticleVotes } from "../utils/api";
+import { UserContext } from "../../contexts/UserContext";
+import { updateArticleVotes } from "../../utils/api";
 
 const VoteForm = ({ story, setStory }) => {
     const { loggedInUser } = useContext(UserContext);

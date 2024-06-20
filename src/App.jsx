@@ -2,12 +2,12 @@ import { Routes, Route } from 'react-router-dom';
 import { useContext, useEffect } from "react"
 import { UserContext } from "./contexts/UserContext";
 import Header from './components/Header'
-import Home from './components/Home';
-import Story from './components/Story';
-import AllTopics from './components/AllTopics';
+import Home from './pages/Home';
+import Story from './pages/Story';
+import AllTopics from './pages/AllTopics';
 import PageNotFound from './components/PageNotFound';
 import Footer from './components/Footer'
-import AllStories from './components/AllStories';
+import AllStories from './pages/AllStories';
 
 function App() {
   const { setLoggedInUser } = useContext(UserContext);

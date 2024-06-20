@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react"
 import { Flex, Heading, Spinner } from "@chakra-ui/react"
-import TopicCard from "./TopicCard"
+import TopicCard from "../components/cards/TopicCard"
 import { fetchAllTopics } from "../utils/api"
 
 const AllTopics = () => {

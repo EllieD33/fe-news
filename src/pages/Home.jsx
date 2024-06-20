@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Flex, Spinner, Text, Heading } from "@chakra-ui/react";
+import { Flex, Text, Heading } from "@chakra-ui/react";
 import { fetchAllArticles } from "../utils/api";
-import FeaturedStories from "./FeaturedStories";
+import FeaturedStories from "../components/containers/FeaturedStories";
 
 const Home = () => {
     const [isLoading, setIsLoading] = useState(true);

@@ -1,7 +1,7 @@
 import { Box, Button, FormLabel, Textarea, Text } from "@chakra-ui/react";
 import { useState, useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
-import { addComment } from "../utils/api";
+import { UserContext } from "../../contexts/UserContext";
+import { addComment } from "../../utils/api";
 
 const NewCommentForm = ({ setComments, comments, article_id, setCommentFormIsVisible }) => {
     const { loggedInUser } = useContext(UserContext)

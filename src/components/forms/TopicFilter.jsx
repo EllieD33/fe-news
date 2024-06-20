@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, FormControl, FormLabel, Select, Flex } from "@chakra-ui/react";
-import { fetchAllTopics } from "../utils/api";
-import { capitaliseFirstLetter } from '../utils/helpers';
+import { fetchAllTopics } from "../../utils/api";
+import { capitaliseFirstLetter } from '../../utils/helpers';
 
 const TopicFilter = ({ onTopicChange }) => {
     const [topics, setTopics] = useState([]);
