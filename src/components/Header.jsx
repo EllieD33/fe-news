@@ -12,7 +12,8 @@ const Header = () => {
 
     useEffect(() => {
         fetchAllTopics().then(({ topics }) => {
-            setTopics(topics);
+            const sortedTopics = topics.sort((a, b) => a.slug.localeCompare(b.slug));
+            setTopics(sortedTopics);
         })
     }, [])
 
