@@ -10,6 +10,7 @@ const AllTopics = () => {
     const [topics, setTopics] = useState([]);
     const [newTopicFormIsVisible, setNewTopicFormIsVisible] = useState(false);
     const [showTopicFormButton, setShowTopicFormButton] = useState(true);
+    const [successMessage, setSuccessMessage] = useState(false)
 
     const handleAddTopicClick = () => {
         setNewTopicFormIsVisible(true);
@@ -41,7 +42,8 @@ const AllTopics = () => {
                                 Add topic
                             </Button>
                         )}
-            {newTopicFormIsVisible && <NewTopicForm topics={topics} setTopics={setTopics} setNewTopicFormIsVisible={setNewTopicFormIsVisible} setShowTopicFormButton={setShowTopicFormButton} />}
+            {newTopicFormIsVisible && <NewTopicForm topics={topics} setTopics={setTopics} setNewTopicFormIsVisible={setNewTopicFormIsVisible} setShowTopicFormButton={setShowTopicFormButton} setSuccessMessage={setSuccessMessage} />}
+            {successMessage && <Text m={2} >Topic added successfully!</Text>}
             {isLoading ? <Spinner/> :
                 topics.map((topic) => (
                     <TopicCard topic={topic.slug} key={topic.slug} description={topic.description} />

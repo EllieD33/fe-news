@@ -2,7 +2,7 @@ import { FormControl, FormLabel, Input, Flex, Button, Heading, Text } from "@cha
 import { useState } from "react"
 import { addTopic } from "../../utils/api";
 
-const NewTopicForm = ({ topics, setTopics, setNewTopicFormIsVisible, setShowTopicFormButton }) => {
+const NewTopicForm = ({ topics, setTopics, setNewTopicFormIsVisible, setShowTopicFormButton, setSuccessMessage }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState({});
     const [newTopicSlug, setNewTopicSlug] = useState({});
@@ -63,6 +63,8 @@ const NewTopicForm = ({ topics, setTopics, setNewTopicFormIsVisible, setShowTopi
             setErrors({});
             setIsLoading(false)
             setNewTopicFormIsVisible(false)
+            setShowTopicFormButton(true)
+            setSuccessMessage(true)
         }).catch((error) => {
             console.error('Error creating topic:', error);
             setTopics(topics);
