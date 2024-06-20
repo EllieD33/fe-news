@@ -30,7 +30,7 @@ const Topic = ({ topic, setStories, stories }) => {
     }
 
     return (
-        <Container as="section" tabIndex={0} m={4} py={4} border="none" justify="center" >
+        <Container as="section" m={4} py={4} border="none" justify="center" >
             <Flex justify="space-between" align="center">
                 <Heading as="h3" textAlign="center" fontSize="2xl">{topic ? capitaliseFirstLetter(topic) : 'All'} stories</Heading>
                 <SortForm setSearchParams={setSearchParams} />

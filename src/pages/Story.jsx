@@ -70,7 +70,7 @@ const Story = () => {
                         maxW="70%"
                         alignItems="center"
                     >
-                        <Heading tabIndex={0} fontSize="3xl" textAlign="center">
+                        <Heading fontSize="3xl" textAlign="center">
                             {story && story.title}
                         </Heading>
                         <Text>
@@ -105,7 +105,7 @@ const Story = () => {
                         align="center"
                         w="50%"
                     >
-                        <Heading tabIndex={0} as="h3" fontSize="lg">
+                        <Heading as="h3" fontSize="lg">
                             Comments
                         </Heading>
                         {showCommentFormButton && (

@@ -9,7 +9,7 @@ import { capitaliseFirstLetter, formatDate } from '../../utils/helpers';
 const PreviewCard = ({ article }) => {
     const article_id = article.article_id
     return (
-        <Card as="article" w={[300, 400, 500]} tabIndex={0} m={4} p={2} transition="all 0.2s" _hover={{ transform: "translateY(-4px)", shadow: "lg"}} >
+        <Card as="article" w={[300, 400, 500]} m={4} p={2} transition="all 0.2s" _hover={{ transform: "translateY(-4px)", shadow: "lg"}} >
             <Heading fontSize="lg" as="h4">{article.title}</Heading>
             <Flex alignItems="center" justify="space-between" flexDirection={{ base: "column", md: "row" }}>
                 <Flex w="100%" align="center">
@@ -39,7 +39,7 @@ const PreviewCard = ({ article }) => {
                         </Flex>
                     </Flex>
                 </Flex>
-                    <Flex alignSelf={{base: "flex-start", md: "flex-end"}} >
+                    <Flex alignSelf={{base: "flex-start", md: "flex-end"}}  >
                         <ChakraLink
                                 as={ReactRouterLink}
                                 to={`/stories/${article_id}`}
@@ -48,6 +48,7 @@ const PreviewCard = ({ article }) => {
                             >
                             <Button
                                 w="150px"
+                                tabIndex={-1}
                                 rightIcon={<Icon as={ArrowRightIcon} />}
                                 size="sm"
                                 bg="teal.700"

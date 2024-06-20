@@ -32,7 +32,6 @@ const CommentCard = ({ comment, setComments, comments }) => {
 
     return (
         <Card
-            tabIndex={0}
             as="article"
             m={2}
             p={2}
