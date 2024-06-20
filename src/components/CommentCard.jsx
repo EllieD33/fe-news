@@ -28,7 +28,7 @@ const CommentCard = ({ comment, setComments, comments }) => {
             <Text my={2} >{comment.body}</Text>
             <Flex justify="space-between" align="center" >
                 <Text>Votes: {comment.votes}</Text>
-                {loggedInUser.username === comment.author ? <IconButton isDisabled={isDeleting} aria-label="Delete comment" onClick={handleDelete} icon={<DeleteIcon size="24px" />} w="20px" colorScheme="teal" size="sm" /> : null}
+                {loggedInUser.username === comment.author ? <IconButton sx={{'svg': { color: "whiteAlpha.900"}}} isDisabled={isDeleting} aria-label="Delete comment" onClick={handleDelete} icon={<DeleteIcon size="24px" />} w="20px" colorScheme="teal" size="sm" /> : null}
             </Flex>
                 {errors.deleteComment && <Text fontSize="sm" color="red">{errors.deleteComment}</Text>}
         </Card>

@@ -69,7 +69,7 @@ const Story = () => {
                 </Flex>
                 <Flex as="section" direction="column" align="center" w="50%" >
                     <Heading tabIndex={0}  as="h3" fontSize="lg" >Comments</Heading>
-                    {showCommentFormButton && <Button w="150px" leftIcon={<Icon as={AddIcon} />} size="sm" colorScheme="teal" onClick={handleAddCommentClick}>Add comment</Button>}
+                    {showCommentFormButton && <Button w="150px" leftIcon={<Icon as={AddIcon} />} size="sm" colorScheme="teal" sx={{'svg': { color: "whiteAlpha.900"}}} onClick={handleAddCommentClick}>Add comment</Button>}
                     {commentFormIsVisible && <NewCommentForm setComments={setComments} comments={comments} article_id={story.article_id} setCommentFormIsVisible={setCommentFormIsVisible} />}
                     {commentsAreLoading && <Text>Loading comments...</Text>}
                     { comments.length === 0 ? <Text my={2} >No comments yet...</Text> :
