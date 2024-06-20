@@ -1,13 +1,18 @@
-import { Box, Button, FormLabel, Textarea, Text } from "@chakra-ui/react";
+import { Box, Button, FormLabel, Textarea, Text, Flex } from "@chakra-ui/react";
 import { useState, useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { addComment } from "../../utils/api";
 
-const NewCommentForm = ({ setComments, comments, article_id, setCommentFormIsVisible }) => {
+const NewCommentForm = ({ setComments, comments, article_id, setCommentFormIsVisible, setShowCommentFormButton }) => {
     const { loggedInUser } = useContext(UserContext)
     const [ isLoading, setIsLoading] = useState(false);
     const [newComment, setNewComment] = useState('');
     const [errors, setErrors] = useState({});
+
+    const handleCloseClick = () => {
+        setCommentFormIsVisible(false);
+        setShowCommentFormButton(true);
+    }
 
     const handleInputChange = (event) => {
         const inputValue = event.target.value
@@ -46,7 +51,10 @@ const NewCommentForm = ({ setComments, comments, article_id, setCommentFormIsVis
             <FormLabel fontSize="sm" m={0} pl={1} >Enter your comment:</FormLabel>
             <Textarea name="commentTextInput" value={newComment} placeholder="Type your comment..." onChange={handleInputChange} />
             {errors.commentTextInput && <Text fontSize="sm" color="red">{errors.commentTextInput}</Text>}
-            <Button mt={1} type="submit" colorScheme="teal" size="sm" >{isLoading ? 'Adding...' : 'Add'}</Button>
+            <Flex justify="space-between">
+                <Button mt={1} type="submit" colorScheme="teal" size="sm" >{isLoading ? 'Adding...' : 'Add'}</Button>
+                <Button mt={1} onClick={handleCloseClick} colorScheme="teal" size="sm" >Close</Button>
+            </Flex>
         </Box>
     )
 }

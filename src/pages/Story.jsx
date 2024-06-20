@@ -58,7 +58,7 @@ const Story = () => {
     }
 
     return (
-        <Flex id="main" as="main" direction="column" align="center">
+        <Flex m={4} as="main" direction="column" align="center">
             {isLoading ? (
                 <Spinner />
             ) : (
@@ -128,6 +128,7 @@ const Story = () => {
                                 setCommentFormIsVisible={
                                     setCommentFormIsVisible
                                 }
+                                setShowCommentFormButton={setShowCommentFormButton}
                             />
                         )}
                         {commentsAreLoading && <Text>Loading comments...</Text>}
