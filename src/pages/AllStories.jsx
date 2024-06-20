@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import { Flex, Spinner, Text } from "@chakra-ui/react";
+import { Flex, Spinner, Heading } from "@chakra-ui/react";
 import { fetchAllArticles } from "../utils/api";
 import TopicFilter from "../components/forms/TopicFilter";
 import Topic from "../components/containers/Topic";
@@ -32,6 +32,7 @@ const AllStories = () => {
     
     return (
         <Flex as="main" pt={4} direction="column" alignItems="center" >
+            <Heading>Stories</Heading>
             {isLoading ? <Spinner/> :
             (
                 <>

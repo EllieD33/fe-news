@@ -50,6 +50,8 @@ const PreviewCard = ({ article }) => {
                                 w="150px"
                                 rightIcon={<Icon as={ArrowRightIcon} />}
                                 size="sm"
+                                bg="teal.700"
+                                _hover={{ bg: 'teal.500' }}
                                 colorScheme="teal"
                                 sx={{'svg': { color: "whiteAlpha.900"}}}
                             >

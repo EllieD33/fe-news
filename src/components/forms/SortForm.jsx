@@ -37,7 +37,7 @@ const SortForm = ({ setSearchParams }) => {
                         Sort:
                     </FormLabel>
                 </VisuallyHidden>
-                <Select onChange={handleSortChange} size="sm" value={sortBy} borderRadius="5px" >
+                <Select name="sort-select" id="sort-select" onChange={handleSortChange} size="sm" value={sortBy} borderRadius="5px" >
                     <option name="created_at" value="created_at">Date</option>
                     <option name="comment_count" value="comment_count">Comments</option>
                     <option name="votes" value="votes">Votes</option>

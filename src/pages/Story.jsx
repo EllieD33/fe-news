@@ -114,6 +114,8 @@ const Story = () => {
                                 leftIcon={<Icon as={AddIcon} />}
                                 size="sm"
                                 colorScheme="teal"
+                                bg="teal.700"
+                                _hover={{ bg: 'teal.500' }}
                                 sx={{ svg: { color: "whiteAlpha.900" } }}
                                 onClick={handleAddCommentClick}
                             >
