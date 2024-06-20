@@ -1,0 +1,20 @@
+import { Flex, Heading, Text, Spinner } from "@chakra-ui/react"
+import PreviewCard from "./PreviewCard"
+
+const FeaturedStories = ({ title, subtitle, stories, isLoading }) => {
+    return (
+        <Flex m={4} as="section" direction="column" align="center">
+            <Heading as="h3">{title}</Heading>
+            <Text>{subtitle}</Text>
+            <Flex direction="column" align="center">
+                {isLoading ? <Spinner/> :
+                    stories.map((article) => (
+                        <PreviewCard key={article.article_id} article={article} />
+                    ))
+                }
+            </Flex>
+        </Flex>
+    )
+}
+
+export default FeaturedStories;

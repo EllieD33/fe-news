@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Flex, Spinner, Text, Heading } from "@chakra-ui/react";
 import { fetchAllArticles } from "../utils/api";
-import PreviewCard from "./PreviewCard";
+import FeaturedStories from "./FeaturedStories";
 
 const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -31,31 +31,12 @@ const Home = () => {
     return (
         <Flex id="main" as="main" pt={4} direction="column" alignItems="center" >
             <section >
-                <Text mx={2} textAlign="center" >Welcome to NewsHub. Enjoy your time here, and remember: It's nice to be nice!!!</Text>
+                <Heading>Welcome to NewsHub</Heading>
+                <Text mx={2} textAlign="center" >Enjoy your time here, and remember: It's nice to be nice!!!</Text>
             </section>
-            <Flex>
-                <Flex direction="column" align="center">
-                    <Heading>What's new?</Heading>
-                    <Text>Recently added stories</Text>
-                    <Flex direction="column" align="center">
-                        {isLoading ? <Spinner/> :
-                            recentStories.map((article) => (
-                                <PreviewCard key={article.article_id} article={article} />
-                            ))
-                        }
-                    </Flex>
-                </Flex>
-                <Flex direction="column" align="center">
-                    <Heading>Trending</Heading>
-                    <Text>Most popular stories</Text>
-                    <Flex direction="column" align="center">
-                        {isLoading ? <Spinner/> :
-                            mostPopularStories.map((article) => (
-                                <PreviewCard key={article.article_id} article={article} />
-                            ))
-                        }
-                    </Flex>
-                </Flex>
+            <Flex wrap="wrap" align="center" justify="center">
+                <FeaturedStories title="What's new" subtitle="Recently added stories" stories={recentStories} isLoading={isLoading} />
+                <FeaturedStories title="Trending" subtitle="Most popular stories" stories={mostPopularStories} isLoading={isLoading} />
             </Flex>
     </Flex>
     )
