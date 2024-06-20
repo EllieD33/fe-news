@@ -5,16 +5,16 @@ import { FaArrowCircleUp } from "react-icons/fa";
 const Footer = () => {
     const [isVisible, setIsVisible] = useState(false);
 
-    const handleScroll = () => {
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        setIsVisible(scrollTop > window.innerHeight);
-    };
-
     const handleScrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            setIsVisible(scrollTop > window.innerHeight);
+        };
+
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
