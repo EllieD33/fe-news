@@ -9,9 +9,12 @@ const PageNotFound = () => {
     let conditionalAddTopic = null;
     if (pathname.startsWith("/topics/")) {
         conditionalAddTopic = (
-            <Text mt={4}>
-                This topic doesn't exist - do you want to add it?
-            </Text>
+            <>
+                <Text mt={4}>
+                    This topic doesn't exist - do you want to add it?
+                </Text>
+                <ChakraLink as={ReactRouterLink} to="/topics" mt={4} >View all topics</ChakraLink>
+            </>
         );
     }
 
