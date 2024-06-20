@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Heading, Container, Flex, Spinner } from "@chakra-ui/react";
+import { Heading, Container, Flex, Spinner, Text } from "@chakra-ui/react";
 import { fetchAllArticles } from "../../utils/api";
 import { capitaliseFirstLetter } from '../../utils/helpers';
 import PreviewCard from "../cards/PreviewCard";
@@ -41,6 +41,7 @@ const Topic = ({ topic, setStories, stories }) => {
                         <PreviewCard key={article.article_id} article={article} />
                     ))
                 }
+                {stories.length === 0 && !isLoading && <Text mt={4} p={2} >No stories on this topic yet - be the first to add one!</Text>}
             </Flex>
         </Container>
     )

@@ -41,7 +41,7 @@ const TopicFilter = ({ onTopicChange }) => {
                     }
                 </Select>
             </FormControl>
-            <Button onClick={handleClear} size="sm" ml={2} colorScheme="teal" variant="outline">Clear</Button>
+            <Button onClick={handleClear} size="sm" ml={2} colorScheme="teal" color="teal.800" variant="outline">Clear</Button>
         </Flex>
     )
 }
