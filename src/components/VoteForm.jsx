@@ -44,7 +44,7 @@ const VoteForm = ({ story, setStory }) => {
     return (
         <Flex as="form" align="center">
             <IconButton type="submit" onClick={handleVote} isDisabled={hasVoted} name="downVote" border="none" tabIndex={0} mr={1} icon={<TiArrowDownOutline size="24px" />} aria-label='down vote article' variant="outline" colorScheme="teal" size="sm" />
-            <Text>Votes: {`${story.votes}`}</Text>
+            <Text>{`${story.votes}`}</Text>
             <IconButton type="submit" onClick={handleVote} isDisabled={hasVoted} name="upVote" border="none" tabIndex={0} ml={1} icon={<TiArrowUpOutline size="24px" />} aria-label='up vote article' variant="outline" colorScheme="teal" size="sm" />
         </Flex>
     )

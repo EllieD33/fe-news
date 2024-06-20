@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link as ReactRouterLink } from 'react-router-dom'
-import { useColorMode, IconButton, Heading, Flex, Link as ChakraLink, Text } from "@chakra-ui/react";
+import { useColorMode, IconButton, Heading, Flex, Icon, Link as ChakraLink, Text } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { LuNewspaper } from "react-icons/lu";
 import { fetchAllTopics } from "../utils/api";
 import { capitaliseFirstLetter } from '../utils/helpers';
 
@@ -16,8 +17,9 @@ const Header = () => {
     }, [])
 
     return (
-        <header>
-            <Flex m={2} justify="space-between" >
+        <Flex as="header" direction="column" borderBottom="1px" borderColor="teal.600" >
+            <Flex m={2} justify="space-between" align="center" >
+                <Icon as={LuNewspaper} boxSize={10} />
                 <Heading as="h1" textAlign="center" flex="1">NewsHub</Heading>
                 <IconButton
                         ml={2}
@@ -46,7 +48,7 @@ const Header = () => {
                     ))
                 }
             </Flex>
-        </header>
+        </Flex>
     )
 }
 

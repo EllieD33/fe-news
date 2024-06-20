@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Heading, Container, Flex, Spinner, Text } from "@chakra-ui/react";
+import { Heading, Container, Flex, Spinner } from "@chakra-ui/react";
 import { fetchAllArticles } from "../utils/api";
 import { capitaliseFirstLetter } from '../utils/helpers';
 import PreviewCard from "./PreviewCard";
@@ -30,7 +30,7 @@ const Topic = ({ topic, setStories, stories }) => {
     }
 
     return (
-        <Container as="section" tabIndex={0} m={4} py={4} border="none" direction="column" justify="center" >
+        <Container as="section" tabIndex={0} m={4} py={4} border="none" justify="center" >
             <Flex justify="space-between" align="center">
                 <Heading textAlign="center" fontSize="2xl">{topic ? capitaliseFirstLetter(topic) : 'All'} stories</Heading>
                 <SortForm setSearchParams={setSearchParams} />

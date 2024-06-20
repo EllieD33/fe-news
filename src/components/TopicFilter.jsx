@@ -29,7 +29,7 @@ const TopicFilter = ({ onTopicChange }) => {
     return (
         <Flex mt={2} as="form" align="flex-end" >
             <FormControl>
-                <FormLabel pl={1} m={0} >
+                <FormLabel fontSize="sm" pl={1} m={0} >
                     Filter by topic:
                 </FormLabel>
                 <Select borderRadius="5px" size="sm" onChange={handleTopicChange}>

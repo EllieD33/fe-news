@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link as ReactRouterLink } from "react-router-dom";
 import { Heading, Flex, Text, Box, Button, Icon, Link as ChakraLink, Spinner} from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
+import { FaRegCommentAlt } from "react-icons/fa";
 import { fetchArticleById, fetchArticleComments } from "../utils/api";
 import { formatDate, capitaliseFirstLetter } from "../utils/helpers";
 import CommentCard from "./CommentCard";
@@ -46,7 +47,7 @@ const Story = () => {
     }
 
     return (
-        <Flex as="main" direction="column" align="center" >
+        <Flex id="main" as="main" direction="column" align="center" >
             {isLoading ? (<Spinner/>) :
             (
             <>
@@ -60,7 +61,10 @@ const Story = () => {
                     <Text my={2} maxW="80%" minW="320px" >{story.body}</Text>
                     <Flex w="100%" justify="space-around" align="center" >
                         <VoteForm story={story} setStory={setStory} />
-                        <Text>Comments: {`${story.comment_count}`}</Text>
+                        <Flex align="center">
+                            <Icon as={FaRegCommentAlt} color="teal.700" />
+                            <Text pl={2} >{`${story.comment_count}`}</Text>
+                        </Flex>
                     </Flex>
                 </Flex>
                 <Flex as="section" direction="column" align="center" w="50%" >
