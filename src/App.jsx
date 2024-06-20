@@ -8,6 +8,7 @@ import AllTopics from './pages/AllTopics';
 import PageNotFound from './components/PageNotFound';
 import Footer from './components/Footer'
 import AllStories from './pages/AllStories';
+import PostStory from './pages/PostStory';
 
 function App() {
   const { setLoggedInUser } = useContext(UserContext);
@@ -24,6 +25,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/stories" element={<AllStories />} />
         <Route path="/stories/:article_id" element={<Story />} />
+        <Route path="/stories/post-story" element={<PostStory />} />
         <Route path="/topics" element={<AllTopics/>} />
         <Route path="/topics/:slug" element={<AllStories />} />
         <Route path="*" element={<PageNotFound/>} />

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, FormControl, FormLabel, Select, Flex } from "@chakra-ui/react";
 import { fetchAllTopics } from "../../utils/api";
 import { capitaliseFirstLetter } from '../../utils/helpers';
+import TopicSelector from "./TopicSelector";
 
 const TopicFilter = ({ onTopicChange }) => {
     const [topics, setTopics] = useState([]);
@@ -9,7 +10,8 @@ const TopicFilter = ({ onTopicChange }) => {
 
     useEffect(() => {
         fetchAllTopics().then(({ topics }) => {
-            setTopics(topics);
+            const sortedTopics = topics.sort((a, b) => a.slug.localeCompare(b.slug));
+            setTopics(sortedTopics);
         })
     }, [])
 
@@ -32,14 +34,7 @@ const TopicFilter = ({ onTopicChange }) => {
                 <FormLabel fontSize="sm" pl={1} m={0} >
                     Filter by topic:
                 </FormLabel>
-                <Select borderRadius="5px" size="sm" onChange={handleTopicChange}>
-                    <option>Select topic</option>
-                    {topics && 
-                        topics.map((topic) => (
-                            <option key={topic.slug} value={topic.slug} >{capitaliseFirstLetter(topic.slug)}</option>
-                        ))
-                    }
-                </Select>
+                <TopicSelector topics={topics} onChange={handleTopicChange} />
             </FormControl>
             <Button onClick={handleClear} size="sm" ml={2} colorScheme="teal" color="teal.800" variant="outline">Clear</Button>
         </Flex>

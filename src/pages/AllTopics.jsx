@@ -30,7 +30,7 @@ const AllTopics = () => {
             <Heading fontSize="3xl">All topics</Heading>
             <Text textAlign="center" p={2}>Can't find what you're looking for? You could add your own topic.</Text>
             {showTopicFormButton && (
-                <Button
+                <Button mb={2}
                 w="150px"
                 leftIcon={<Icon as={AddIcon} />}
                 size="sm"
