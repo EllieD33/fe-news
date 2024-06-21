@@ -46,7 +46,7 @@ const CommentCard = ({ comment, setComments, comments }) => {
             <Text my={2}>{comment.body}</Text>
             <Flex justify="space-between" align="center">
                 <Text>Votes: {comment.votes}</Text>
-                {loggedInUser.username === comment.author ? (
+                {loggedInUser && loggedInUser.username === comment.author ? (
                     <IconButton
                         sx={{ svg: { color: "whiteAlpha.900" } }}
                         isDisabled={isDeleting}
