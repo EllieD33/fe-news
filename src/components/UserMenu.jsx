@@ -7,7 +7,12 @@ import { MdLogin, MdLogout } from "react-icons/md";
 
 
 const UserMenu = () => {
-    const { loggedInUser } = useContext(UserContext);
+    const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+
+    const handleLogout = () => {
+        setLoggedInUser(null)
+    }
+
     return (
         <Menu>
             <MenuButton 
@@ -26,7 +31,7 @@ const UserMenu = () => {
                         <MenuItem icon={<FaRegUser />}>
                             Profile
                         </MenuItem>
-                        <MenuItem icon={<MdLogout />}>
+                        <MenuItem icon={<MdLogout />} onClick={handleLogout} >
                             Log out
                         </MenuItem>
                     </>
