@@ -25,10 +25,16 @@ const NewTopicForm = ({ topics, setTopics, setNewTopicFormIsVisible, setShowTopi
         let isValid = true
         const errors = {};
 
+        if (topics.some(topic => topic.slug === newTopicSlug)) {
+            errors.alreadyExists = "Topic already exists";
+            isValid = false;
+        }
+
         if (!newTopicSlug || !newTopicDesc) {
             errors.blankInputError = "Topic name and description must both be provided";
             isValid = false;
         }
+        
         const slugRegex = /^[a-z]{1,15}$/
         const descRegex = /^(?=(.*[a-zA-Z].*))(\b[\w'-]+\b[,.!?;:]?\s*){1,20}$/
 
@@ -81,6 +87,7 @@ const NewTopicForm = ({ topics, setTopics, setNewTopicFormIsVisible, setShowTopi
                     Topic (single lowercase word):
                 </FormLabel>
                 <Input name="slugInput" id="slugInput" onChange={handleSlugInputChange} placeholder="Enter topic..." size="sm" borderRadius="5px" required />
+                {errors.alreadyExists && <Text fontSize="sm" color="red">{errors.alreadyExists}</Text>}
                 {errors.slugInput && <Text fontSize="sm" color="red">{errors.slugInput}</Text>}
                 <FormLabel fontSize="sm" m={0} pl={1}>
                     Topic description (1-20 words):
@@ -92,6 +99,7 @@ const NewTopicForm = ({ topics, setTopics, setNewTopicFormIsVisible, setShowTopi
                 <Button mt={1} type="submit" colorScheme="teal" size="sm">{isLoading ? 'Adding...' : 'Add'}</Button>
                 <Button mt={1} onClick={handleCloseClick} colorScheme="teal" size="sm" >Close</Button>
             </Flex>
+            {errors.failedToAdd && <Text fontSize="sm" color="red">{errors.failedToAdd}</Text> }
         </Flex>
     )
 }
