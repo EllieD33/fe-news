@@ -4,30 +4,29 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FaRegCopy } from "react-icons/fa";
 
 const Share = ({ url, title }) => {
-    console.log(url, '<<<URL', title, '<<<title')
     const handleCopy = () => {
         alert('URL copied to clipboard!');
     };
 
     return (
         <Flex justify="space-around" w="250px">
-            <RedditShareButton url={url} title={title}>
+            <RedditShareButton aria-label="Share on Reddit" url={url} title={title}>
                 <RedditIcon size={38} round />
             </RedditShareButton>
 
-            <WhatsappShareButton url={url} title={title}>
+            <WhatsappShareButton aria-label="Share on WhatsApp" url={url} title={title}>
                 <WhatsappIcon size={38} round />
             </WhatsappShareButton>
 
-            <LinkedinShareButton url={url} title={title}>
+            <LinkedinShareButton aria-label="Share on LinkedIn" url={url} title={title}>
                 <LinkedinIcon size={38} round />
             </LinkedinShareButton>
 
-            <FacebookShareButton url={url} quote={title} >
+            <FacebookShareButton aria-label="Share on Facebook" url={url}>
                 <FacebookIcon size={38} round />
             </FacebookShareButton>
 
-            <EmailShareButton url={url} subject={title} body="Check out this post!">
+            <EmailShareButton aria-label="Share via email" url={url} subject={title} body="Check out this post!">
                 <EmailIcon size={38} round />
             </EmailShareButton>
 
