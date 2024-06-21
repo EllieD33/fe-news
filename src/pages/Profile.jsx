@@ -42,11 +42,13 @@ const Profile = () => {
                 <Heading fontSize="3xl">{userDetails.name}</Heading>
                 <Image m={4} src={userDetails.avatar_url} alt={`${userDetails.name}'s avatar`} /> 
                 <Heading mt={4} as="h3" fontSize="2xl" >Your Posts</Heading>
-                {usersStories && 
-                    usersStories.map((story) => (
-                        <PreviewCard key={story.article_id} article={story} />
-                    ))
-                }
+                <Flex wrap="wrap" justify="center" >
+                    {usersStories &&
+                        usersStories.map((story) => (
+                            <PreviewCard key={story.article_id} article={story} />
+                        ))
+                    }
+                </Flex>
                 {!usersStories && 
                     <>
                     <Text m={2} >You haven't written anything yet.</Text>
