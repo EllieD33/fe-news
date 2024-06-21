@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams, Link as ReactRouterLink } from "react-router-dom";
 import {
     Heading,
@@ -12,11 +12,12 @@ import {
     IconButton,
     Image
 } from "@chakra-ui/react";
-import { AddIcon } from "@chakra-ui/icons";
+import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { GrShareOption } from "react-icons/gr";
 import { fetchArticleById, fetchArticleComments } from "../utils/api";
 import { formatDate, capitaliseFirstLetter } from "../utils/helpers";
+import UserContext from "../contexts/UserContext";
 import CommentCard from "../components/cards/CommentCard";
 import VoteForm from "../components/forms/VoteForm";
 import NewCommentForm from "../components/forms/NewCommentForm";
@@ -24,6 +25,7 @@ import PageNotFound from "../components/PageNotFound";
 import Share from "../components/Share";
 
 const Story = () => {
+    const { loggedInUser } = useContext(UserContext);
     const [isLoading, setIsLoading] = useState(true);
     const [commentsAreLoading, setCommentsAreLoading] = useState(true);
     const [story, setStory] = useState({});
@@ -99,6 +101,11 @@ const Story = () => {
                                 {capitaliseFirstLetter(story.topic)}
                             </ChakraLink>
                         </Flex>
+                        {story.author === loggedInUser.username && 
+                            <Flex>
+                                <IconButton aria-label="delete story" m={2} colorScheme="teal" icon={<DeleteIcon/>} />
+                            </Flex>
+                        }
                         <Image maxW="500px" src={story.article_img_url} alt="Image relating to story" />
                         <Text my={2} maxW="80%" minW="320px">
                             {story.body}

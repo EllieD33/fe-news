@@ -13,8 +13,8 @@ export const addTopic = (slug, description) => {
     });
 }
 
-export const fetchAllArticles = (slug = '', sortBy = "", sortOrder = "", limit = null, author = '' ) => {
-    return newsApi.get("/articles", { params: { topic: slug, sort_by: sortBy, order: sortOrder, limit: limit, author: author }}).then(({ data }) => data)
+export const fetchAllArticles = (slug = '', sortBy = "", sortOrder = "", limit = 100, author = null ) => {
+    return newsApi.get("/articles", { params: { topic: slug, author: author, sort_by: sortBy, order: sortOrder, limit: limit }}).then(({ data }) => data)
     .catch(error => {
         throw error;
     });

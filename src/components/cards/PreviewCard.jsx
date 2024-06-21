@@ -1,13 +1,13 @@
-import { Card, Heading, Image, Text, Flex, Link as ChakraLink, Button, Icon } from "@chakra-ui/react"
+import { Card, Heading, Image, Text, Flex, Link as ChakraLink, Icon } from "@chakra-ui/react"
 import { FaRegCommentAlt,  } from "react-icons/fa";
 import { TiArrowDownOutline, TiArrowUpOutline, TiMinusOutline } from "react-icons/ti";
-
 import { Link as ReactRouterLink } from "react-router-dom";
 import { capitaliseFirstLetter, formatDate } from '../../utils/helpers';
 import InternalLink from "../InternalLink";
 
 const PreviewCard = ({ article }) => {
-    const article_id = article.article_id
+    const article_id = article.article_id;
+
     return (
         <Card as="article" w={[300, 400, 500]} minW="300px" m={4} p={2} transition="all 0.2s" _hover={{ transform: "translateY(-4px)", shadow: "lg"}} >
             <Heading fontSize="lg" as="h4">{article.title}</Heading>
@@ -23,7 +23,7 @@ const PreviewCard = ({ article }) => {
                         <Text>On: {formatDate(article.created_at)}</Text>
                         <Flex>
                             {article.votes > 0 && (
-                                <Icon as={TiArrowUpOutline} boxSize={5} />
+                                <Icon as={TiArrowUpOutline } boxSize={5} />
                             )}
                             {article.votes < 0 && (
                                 <Icon as={TiArrowDownOutline} boxSize={5} />
