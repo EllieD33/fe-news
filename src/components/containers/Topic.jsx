@@ -30,12 +30,12 @@ const Topic = ({ topic, setStories, stories }) => {
     }
 
     return (
-        <Container as="section" m={4} py={4} border="none" justify="center" >
-            <Flex justify="space-between" align="center">
+        <Flex as="section" direction="column" m={4} py={4} border="none" justify="center" align="center" >
+            <Flex maxW="500px" w="80%" justify="space-between" align="center">
                 <Heading as="h3" textAlign="center" fontSize="2xl">{topic ? capitaliseFirstLetter(topic) : 'All stories'}</Heading>
                 <SortForm setSearchParams={setSearchParams} />
             </Flex>
-            <Flex direction="column" align="center">
+            <Flex flex={1} wrap="wrap" align="center" justify="center" >
                 {isLoading ? <Spinner/> :
                     stories.map((article) => (
                         <PreviewCard key={article.article_id} article={article} />
@@ -43,7 +43,7 @@ const Topic = ({ topic, setStories, stories }) => {
                 }
                 {stories.length === 0 && !isLoading && <Text mt={4} p={2} >No stories on this topic yet - be the first to add one!</Text>}
             </Flex>
-        </Container>
+        </Flex>
     )
 }
 

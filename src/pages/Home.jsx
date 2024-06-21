@@ -34,7 +34,7 @@ const Home = () => {
                 <Heading fontSize="3xl" textAlign="center">Welcome to NewsHub</Heading>
                 <Text mx={2} textAlign="center">Enjoy your time here, and remember: It's nice to be nice!!!</Text>
             </section>
-            <Flex wrap="wrap" align="center" justify="center">
+            <Flex wrap="wrap" align="flex-start" justify="center">
                 <FeaturedStories title="What's new" subtitle="Recently added stories" stories={recentStories} isLoading={isLoading} />
                 <FeaturedStories title="Trending" subtitle="Most popular stories" stories={mostPopularStories} isLoading={isLoading} />
             </Flex>

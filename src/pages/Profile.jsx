@@ -27,9 +27,9 @@ const Profile = () => {
 
     useEffect(() => {
         if (loggedInUser) {
-            fetchAllArticles(userDetails.author).then((data) => {
-                const { articles } = data;
-                setUsersStories(articles);
+            fetchAllArticles().then((data) => {
+                const filteredArticles = data.articles.filter(article => article.author === loggedInUser.username);
+                setUsersStories(filteredArticles);
             })
         }
     }, [loggedInUser])
