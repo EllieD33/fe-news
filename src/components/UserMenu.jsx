@@ -27,6 +27,10 @@ const UserMenu = () => {
         navigate("/login")
     }
 
+    const handleProfileClick = () => {
+        navigate("/profile")
+    }
+
     return (
         <Menu>
             <MenuButton 
@@ -42,7 +46,7 @@ const UserMenu = () => {
                     </MenuItem>
                 ) : (
                     <>
-                        <MenuItem icon={<FaRegUser />}>
+                        <MenuItem icon={<FaRegUser />} onClick={handleProfileClick} >
                             Profile
                         </MenuItem>
                         <MenuItem icon={<MdLogout />} onClick={handleLogout} >

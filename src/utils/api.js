@@ -13,8 +13,8 @@ export const addTopic = (slug, description) => {
     });
 }
 
-export const fetchAllArticles = (slug, sortBy, sortOrder, limit ) => {
-    return newsApi.get("/articles", { params: { topic: slug, sort_by: sortBy, order: sortOrder, limit: limit }}).then(({ data }) => data)
+export const fetchAllArticles = (slug = '', sortBy = "", sortOrder = "", limit = null, author = '' ) => {
+    return newsApi.get("/articles", { params: { topic: slug, sort_by: sortBy, order: sortOrder, limit: limit, author: author }}).then(({ data }) => data)
     .catch(error => {
         throw error;
     });
@@ -65,6 +65,13 @@ export const postStory = (author, title, body, topic, article_img_url) => {
 
 export const getAllUsers = () => {
     return newsApi.get("/users").then(({ data }) => data)
+    .catch(error => {
+        throw error;
+    });
+}
+
+export const getUserbyUsername = (username) => {
+    return newsApi.get(`/users/${username}`).then(({ data }) => data)
     .catch(error => {
         throw error;
     });

@@ -10,6 +10,7 @@ import Footer from './components/Footer'
 import AllStories from './pages/AllStories';
 import PostStory from './components/forms/PostStory';
 import Login from './pages/Login';
+import Profile from './pages/Profile';
 
 function App() {
   const { setLoggedInUser } = useContext(UserContext);
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/stories" element={<AllStories />} />
         <Route path="/stories/:article_id" element={<Story />} />
         <Route path="/stories/post-story" element={<PostStory />} />
