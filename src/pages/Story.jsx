@@ -9,15 +9,18 @@ import {
     Icon,
     Link as ChakraLink,
     Spinner,
+    IconButton
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { FaRegCommentAlt } from "react-icons/fa";
+import { GrShareOption } from "react-icons/gr";
 import { fetchArticleById, fetchArticleComments } from "../utils/api";
 import { formatDate, capitaliseFirstLetter } from "../utils/helpers";
 import CommentCard from "../components/cards/CommentCard";
 import VoteForm from "../components/forms/VoteForm";
 import NewCommentForm from "../components/forms/NewCommentForm";
 import PageNotFound from "../components/PageNotFound";
+import Share from "../components/Share";
 
 const Story = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -26,6 +29,7 @@ const Story = () => {
     const [comments, setComments] = useState([]);
     const [commentFormIsVisible, setCommentFormIsVisible] = useState(false);
     const [showCommentFormButton, setShowCommentFormButton] = useState(true);
+    const [shareIconsVisible, setShareIconsVisible] = useState(false)
     const [dataFetchFailed, setDataFetchFailed] = useState(false);
     const { article_id } = useParams();
 
@@ -48,6 +52,10 @@ const Story = () => {
         });
     }, [setComments]);
 
+    const handleShareClick = () => {
+        setShareIconsVisible(!shareIconsVisible);
+    }
+
     const handleAddCommentClick = () => {
         setCommentFormIsVisible(true);
         setShowCommentFormButton(false);
@@ -56,6 +64,8 @@ const Story = () => {
     if (dataFetchFailed) {
         return <PageNotFound />;
     }
+
+    const articleUrl = `${window.location.origin}/article/${article_id}`;
 
     return (
         <Flex m={4} as="main" direction="column" align="center">
@@ -97,13 +107,16 @@ const Story = () => {
                                 <Icon as={FaRegCommentAlt} color="teal.700" />
                                 <Text pl={2}>{`${story.comment_count}`}</Text>
                             </Flex>
+                            <IconButton onClick={handleShareClick} isRound={true} icon={<GrShareOption />}/>
                         </Flex>
                     </Flex>
+                    {shareIconsVisible && <Share title={story.title} url={articleUrl} />}
                     <Flex
                         as="section"
                         direction="column"
                         align="center"
                         w="50%"
+                        mt={2}
                     >
                         <Heading as="h3" fontSize="lg">
                             Comments
