@@ -43,6 +43,7 @@ const PreviewCard = ({ article }) => {
                         <ChakraLink
                                 as={ReactRouterLink}
                                 to={`/stories/${article_id}`}
+                                aria-label="Read story"
                                 mb={2}
                                 alignSelf={{base: "flex-end", md: "flex-start"}}
                             >

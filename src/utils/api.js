@@ -43,13 +43,21 @@ export const updateArticleVotes = (article_id, votes) => {
 }
 
 export const addComment = (article_id, username, body) => {
-    return newsApi.post(`/articles/${article_id}/comments`, { username: username, body: body}).then(({ data }) => data).catch(error => {
+    return newsApi.post(`/articles/${article_id}/comments`, { username: username, body: body}).then(({ data }) => data)
+    .catch(error => {
         throw error;
     });
 }
 
 export const deleteComment = (comment_id) => {
     return newsApi.delete(`/comments/${comment_id}`)
+    .catch(error => {
+        throw error;
+    });
+}
+
+export const postStory = (author, title, body, topic, article_img_url) => {
+    return newsApi.post("/articles", {author, title, body, topic, article_img_url}).then(({ data }) => data)
     .catch(error => {
         throw error;
     });

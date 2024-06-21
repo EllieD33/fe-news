@@ -8,7 +8,7 @@ import AllTopics from './pages/AllTopics';
 import PageNotFound from './components/PageNotFound';
 import Footer from './components/Footer'
 import AllStories from './pages/AllStories';
-import PostStory from './pages/PostStory';
+import PostStory from './components/forms/PostStory';
 
 function App() {
   const { setLoggedInUser } = useContext(UserContext);
