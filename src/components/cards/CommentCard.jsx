@@ -1,9 +1,9 @@
-import { Card, Heading, IconButton, Text, Flex } from "@chakra-ui/react";
+import { Card, Heading, Text, Flex } from "@chakra-ui/react";
 import { UserContext } from "../../contexts/UserContext";
 import { useContext, useState } from "react";
 import { formatDate, formatTime } from "../../utils/helpers";
-import { DeleteIcon } from "@chakra-ui/icons";
 import { deleteComment } from "../../utils/api";
+import DeleteButton from "../DeleteButton";
 
 const CommentCard = ({ comment, setComments, comments }) => {
     const { loggedInUser } = useContext(UserContext);
@@ -22,12 +22,15 @@ const CommentCard = ({ comment, setComments, comments }) => {
                 );
             })
             .catch((error) => {
-                console.error("Error deleting comment:", error);
                 setIsDeleting(false);
                 setErrors({
                     deleteComment: "Couldn't delete comment. Please try again.",
                 });
             });
+    };
+
+    const onDelete = () => {
+        handleDelete();
     };
 
     return (
@@ -47,16 +50,7 @@ const CommentCard = ({ comment, setComments, comments }) => {
             <Flex justify="space-between" align="center">
                 <Text>Votes: {comment.votes}</Text>
                 {loggedInUser && loggedInUser.username === comment.author ? (
-                    <IconButton
-                        sx={{ svg: { color: "whiteAlpha.900" } }}
-                        isDisabled={isDeleting}
-                        aria-label="Delete comment"
-                        onClick={handleDelete}
-                        icon={<DeleteIcon size="24px" />}
-                        w="20px"
-                        colorScheme="teal"
-                        size="sm"
-                    />
+                    <DeleteButton thingBeingDeleted={'comment'} onDelete={onDelete} isDeleting={isDeleting} />
                 ) : null}
             </Flex>
             {errors.deleteComment && (

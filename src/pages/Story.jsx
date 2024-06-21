@@ -31,6 +31,7 @@ const Story = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [commentsAreLoading, setCommentsAreLoading] = useState(true);
     const [story, setStory] = useState({});
+    const [isDeleting, setIsDeleting] = useState(false);
     const [storyDeleted, setStoryDeleted] = useState(false);
     const [comments, setComments] = useState([]);
     const [commentFormIsVisible, setCommentFormIsVisible] = useState(false);
@@ -55,18 +56,21 @@ const Story = () => {
         fetchArticleComments(article_id).then(({ comments }) => {
             setComments(comments);
             setCommentsAreLoading(false);
-            setErrors({})
+            setErrors({});
         }).catch((error) => {
             setErrors({ commentFetchFailed: "Failed to load comments"});
         });
     }, [setComments]);
 
     const handleDeleteStoryClick = () => {
+            setIsDeleting(true);
         deleteArticle(article_id).then(() => {
             setStoryDeleted(true);
-            setErrors({})
+            setIsDeleting(false);
+            setErrors({});
         }).catch((error) => {
             setErrors({ deleteFailed: "Failed to delete story"});
+            setIsDeleting(false);
         })
     }
 
@@ -127,9 +131,8 @@ const Story = () => {
                         </Flex>
                         {story.author === loggedInUser.username && 
                             <Flex>
-                                <DeleteButton text={story} onDelete={onDelete} />
+                                <DeleteButton thingBeingDeleted={'story'} onDelete={onDelete} isDeleting={isDeleting} />
                                 {errors.deleteFailed && <Text fontSize="sm" color="red" >{errors.deleteFailed}</Text> }
-                                <IconButton onClick={handleDeleteStoryClick} aria-label="delete story" m={2} colorScheme="teal" variant="outline" icon={<DeleteIcon/>} />
                             </Flex>
                         }
                         <Image maxW="500px" src={story.article_img_url} alt="Image relating to story" />

@@ -1,19 +1,37 @@
-import { AlertDialog, AlertDialogOverlay, AlertDialogHeader, AlertDialogContent, AlertDialogBody, AlertDialogFooter, Button, IconButton, useDisclosure } from "@chakra-ui/react";
+import {
+    AlertDialog,
+    AlertDialogOverlay,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogBody,
+    AlertDialogFooter,
+    Button,
+    IconButton,
+    useDisclosure,
+} from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
-import React from 'react';
+import React from "react";
 
-const DeleteButton = ({ item, onDelete }) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const cancelRef = React.useRef()
+const DeleteButton = ({ thingBeingDeleted, onDelete, isDeleting }) => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const cancelRef = React.useRef();
 
     const handleDelete = () => {
-        onDelete(); 
+        onDelete();
         onClose();
     };
 
     return (
         <>
-            <IconButton onClick={onOpen} aria-label="delete story" m={2} colorScheme="teal" variant="outline" icon={<DeleteIcon/>} />
+            <IconButton size="sm"
+                onClick={onOpen}
+                aria-label={`Delete ${thingBeingDeleted}`}
+                m={2}
+                colorScheme="teal"
+                variant="outline"
+                icon={<DeleteIcon />}
+                isDisabled={isDeleting}
+            />
 
             <AlertDialog
                 isOpen={isOpen}
@@ -23,7 +41,7 @@ const DeleteButton = ({ item, onDelete }) => {
                 <AlertDialogOverlay>
                     <AlertDialogContent>
                         <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                            Delete {item}
+                            Delete {thingBeingDeleted}
                         </AlertDialogHeader>
 
                         <AlertDialogBody>
@@ -34,7 +52,11 @@ const DeleteButton = ({ item, onDelete }) => {
                             <Button ref={cancelRef} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button onClick={handleDelete} colorScheme="red" ml={3}>
+                            <Button
+                                onClick={handleDelete}
+                                colorScheme="red"
+                                ml={3}
+                            >
                                 Delete
                             </Button>
                         </AlertDialogFooter>
