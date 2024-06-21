@@ -1,7 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
-import { Flex, FormControl, FormLabel, Heading, Input, Textarea, Text, Button } from "@chakra-ui/react"
+import { Flex, FormControl, FormLabel, Heading, Input, Textarea, Text, Button, IconButton } from "@chakra-ui/react"
+import { CloseIcon } from "@chakra-ui/icons";
 import { postStory } from "../../utils/api";
 import { fetchAllTopics } from "../../utils/api";
 import TopicSelector from "./TopicSelector"
@@ -23,6 +24,10 @@ const PostStory = () => {
             setTopics(sortedTopics);
         })
     }, [])
+
+    const handleCloseClick = () => {
+        navigate("/stories")
+    }
 
     const handleTopicSelection = (event) => {
         setSelectedTopic(event.target.value);
@@ -96,7 +101,10 @@ const PostStory = () => {
     }
     return (
         <Flex as="main" mt={4} direction="column" align="center">
-            <Heading>Post a story</Heading>
+            <Flex w="80%" justifyContent="space-between">
+                <Heading flex={1} textAlign="center">Post a story</Heading>
+                <IconButton onClick={handleCloseClick} size="sm" aria-label="Close form" icon={<CloseIcon/>} />
+            </Flex>
             <Text>Use this form to post a story. Keep it clean!</Text>
             <Flex onSubmit={handleSubmit} direction="column" as="form" w={[300, 400]} minW="300px">
                 <FormControl display="flex" flexDirection="column" justifyContent="center" >
