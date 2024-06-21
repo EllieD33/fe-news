@@ -5,37 +5,30 @@ import {
     Flex,
     Text,
     Box,
-    Button,
     Icon,
     Link as ChakraLink,
     Spinner,
     IconButton,
     Image
 } from "@chakra-ui/react";
-import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { GrShareOption } from "react-icons/gr";
 import { fetchArticleById, fetchArticleComments, deleteArticle } from "../utils/api";
 import { formatDate, capitaliseFirstLetter } from "../utils/helpers";
 import UserContext from "../contexts/UserContext";
-import CommentCard from "../components/cards/CommentCard";
 import VoteForm from "../components/forms/VoteForm";
-import NewCommentForm from "../components/forms/NewCommentForm";
 import PageNotFound from "../components/PageNotFound";
 import Share from "../components/Share";
 import DeleteButton from "../components/DeleteButton";
+import CommentThread from "../components/CommentThread";
 
 const Story = () => {
     const { loggedInUser } = useContext(UserContext);
     const [errors, setErrors] = useState({})
     const [isLoading, setIsLoading] = useState(true);
-    const [commentsAreLoading, setCommentsAreLoading] = useState(true);
     const [story, setStory] = useState({});
     const [isDeleting, setIsDeleting] = useState(false);
     const [storyDeleted, setStoryDeleted] = useState(false);
-    const [comments, setComments] = useState([]);
-    const [commentFormIsVisible, setCommentFormIsVisible] = useState(false);
-    const [showCommentFormButton, setShowCommentFormButton] = useState(true);
     const [shareIconsVisible, setShareIconsVisible] = useState(false)
     const [dataFetchFailed, setDataFetchFailed] = useState(false);
     const { article_id } = useParams();
@@ -51,16 +44,6 @@ const Story = () => {
                 setDataFetchFailed(true);
             });
     }, []);
-
-    useEffect(() => {
-        fetchArticleComments(article_id).then(({ comments }) => {
-            setComments(comments);
-            setCommentsAreLoading(false);
-            setErrors({});
-        }).catch((error) => {
-            setErrors({ commentFetchFailed: "Failed to load comments"});
-        });
-    }, [setComments]);
 
     const handleDeleteStoryClick = () => {
             setIsDeleting(true);
@@ -81,11 +64,6 @@ const Story = () => {
     const handleShareClick = () => {
         setShareIconsVisible(!shareIconsVisible);
     }
-
-    const handleAddCommentClick = () => {
-        setCommentFormIsVisible(true);
-        setShowCommentFormButton(false);
-    };
 
     if (dataFetchFailed) {
         return <PageNotFound />;
@@ -149,56 +127,7 @@ const Story = () => {
                         </Flex>
                     </Flex>
                     {shareIconsVisible && <Share title={story.title} url={articleUrl} />}
-                    <Flex
-                        as="section"
-                        direction="column"
-                        align="center"
-                        w="50%"
-                        mt={2}
-                    >
-                        <Heading as="h3" fontSize="lg">
-                            Comments
-                        </Heading>
-                        {showCommentFormButton && (
-                            <Button
-                                w="150px"
-                                leftIcon={<Icon as={AddIcon} />}
-                                size="sm"
-                                colorScheme="teal"
-                                bg="teal.700"
-                                _hover={{ bg: 'teal.500' }}
-                                sx={{ svg: { color: "whiteAlpha.900" } }}
-                                onClick={handleAddCommentClick}
-                            >
-                                Add comment
-                            </Button>
-                        )}
-                        {commentFormIsVisible && (
-                            <NewCommentForm
-                                setComments={setComments}
-                                comments={comments}
-                                article_id={story.article_id}
-                                setCommentFormIsVisible={
-                                    setCommentFormIsVisible
-                                }
-                                setShowCommentFormButton={setShowCommentFormButton}
-                            />
-                        )}
-                        {commentsAreLoading && <Text>Loading comments...</Text>}
-                        {errors.commentFetchFailed && <Text>{commentFetchFailed}</Text>}
-                        {comments.length === 0 ? (
-                            <Text my={2}>No comments yet...</Text>
-                        ) : (
-                            comments.map((comment) => (
-                                <CommentCard
-                                    key={comment.comment_id}
-                                    comment={comment}
-                                    setComments={setComments}
-                                    comments={comments}
-                                />
-                            ))
-                        )}
-                    </Flex>
+                    <CommentThread article_id={article_id}/> 
                 </>
             }
         </Flex>
