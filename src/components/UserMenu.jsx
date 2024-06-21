@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { UserContext } from "../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 import { Menu, MenuButton, IconButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { FaRegUser } from "react-icons/fa";
@@ -8,9 +9,14 @@ import { MdLogin, MdLogout } from "react-icons/md";
 
 const UserMenu = () => {
     const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+    const navigate = useNavigate(); 
 
     const handleLogout = () => {
         setLoggedInUser(null)
+    }
+
+    const handleLoginClick = () => {
+        navigate("/login")
     }
 
     return (
@@ -23,7 +29,7 @@ const UserMenu = () => {
             />
             <MenuList>
                 {!loggedInUser ? (
-                    <MenuItem icon={<MdLogin />}>
+                    <MenuItem icon={<MdLogin />} onClick={handleLoginClick} >
                         Log in
                     </MenuItem>
                 ) : (

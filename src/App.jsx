@@ -9,6 +9,7 @@ import PageNotFound from './components/PageNotFound';
 import Footer from './components/Footer'
 import AllStories from './pages/AllStories';
 import PostStory from './components/forms/PostStory';
+import Login from './pages/Login';
 
 function App() {
   const { setLoggedInUser } = useContext(UserContext);
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/stories" element={<AllStories />} />
         <Route path="/stories/:article_id" element={<Story />} />
         <Route path="/stories/post-story" element={<PostStory />} />

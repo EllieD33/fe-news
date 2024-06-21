@@ -62,3 +62,10 @@ export const postStory = (author, title, body, topic, article_img_url) => {
         throw error;
     });
 }
+
+export const getAllUsers = () => {
+    return newsApi.get("/users").then(({ data }) => data)
+    .catch(error => {
+        throw error;
+    });
+}
