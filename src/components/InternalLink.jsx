@@ -16,6 +16,7 @@ const InternalLink = ({ text, ariaLabel, to }) => {
                     bg="teal.700"
                     _hover={{ bg: 'teal.500' }}
                     colorScheme="teal"
+                    color="whiteAlpha.900"
                 >
                     {text}
                 </Button>
