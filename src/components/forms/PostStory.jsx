@@ -26,7 +26,7 @@ const PostStory = () => {
     }, [])
 
     const handleCloseClick = () => {
-        navigate("/stories")
+        navigate(-1)
     }
 
     const handleTopicSelection = (event) => {
