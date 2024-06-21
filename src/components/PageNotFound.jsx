@@ -11,7 +11,7 @@ const PageNotFound = () => {
         conditionalAddTopic = (
             <>
                 <Text mt={4}>
-                    This topic doesn't exist - do you want to add it?
+                    This topic doesn't exist - do you want to <ChakraLink as={ReactRouterLink} to="/topics" mt={4} >add it</ChakraLink>?
                 </Text>
                 <ChakraLink as={ReactRouterLink} to="/topics" mt={4} >View all topics</ChakraLink>
             </>
