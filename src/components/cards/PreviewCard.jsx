@@ -1,10 +1,10 @@
 import { Card, Heading, Image, Text, Flex, Link as ChakraLink, Button, Icon } from "@chakra-ui/react"
-import { ArrowRightIcon } from "@chakra-ui/icons";
 import { FaRegCommentAlt,  } from "react-icons/fa";
 import { TiArrowDownOutline, TiArrowUpOutline, TiMinusOutline } from "react-icons/ti";
 
 import { Link as ReactRouterLink } from "react-router-dom";
 import { capitaliseFirstLetter, formatDate } from '../../utils/helpers';
+import InternalLink from "../InternalLink";
 
 const PreviewCard = ({ article }) => {
     const article_id = article.article_id
@@ -39,28 +39,9 @@ const PreviewCard = ({ article }) => {
                         </Flex>
                     </Flex>
                 </Flex>
-                    <Flex alignSelf={{base: "flex-start", md: "flex-end"}}  >
-                        <ChakraLink
-                                as={ReactRouterLink}
-                                to={`/stories/${article_id}`}
-                                aria-label="Read story"
-                                mb={2}
-                                alignSelf={{base: "flex-end", md: "flex-start"}}
-                            >
-                            <Button
-                                w="150px"
-                                tabIndex={-1}
-                                rightIcon={<Icon as={ArrowRightIcon} />}
-                                size="sm"
-                                bg="teal.700"
-                                _hover={{ bg: 'teal.500' }}
-                                colorScheme="teal"
-                                sx={{'svg': { color: "whiteAlpha.900"}}}
-                            >
-                                Read story
-                            </Button>
-                        </ChakraLink>
-                    </Flex>
+                <Flex alignSelf={{base: "flex-start", md: "flex-end"}}  >
+                    <InternalLink to={`/stories/${article_id}`} ariaLabel="Read story" text="Read story" alignSelf={{ base: "flex-start", md: "flex-end" }} />
+                </Flex>
             </Flex>
         </Card>
     )

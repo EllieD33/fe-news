@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams, useLocation, Link as ReactRouterLink } from "react-router-dom";
-import { Flex, Spinner, Heading,Link as ChakraLink, Button } from "@chakra-ui/react";
+import { useParams, useLocation } from "react-router-dom";
+import { Flex, Spinner, Heading } from "@chakra-ui/react";
 import { fetchAllArticles } from "../utils/api";
 import TopicFilter from "../components/forms/TopicFilter";
 import Topic from "../components/containers/Topic";
+import InternalLink from "../components/InternalLink";
 
 const AllStories = () => {
     const { slug } = useParams();
@@ -33,23 +34,7 @@ const AllStories = () => {
     return (
         <Flex as="main" pt={4} direction="column" alignItems="center" >
             <Heading>Stories</Heading>
-            <ChakraLink
-                as={ReactRouterLink}
-                to="/stories/post-story"
-                aria-label="Post story"
-                mb={2}
-            >
-                <Button
-                    w="150px"
-                    tabIndex={-1}
-                    size="sm"
-                    bg="teal.700"
-                    _hover={{ bg: 'teal.500' }}
-                    colorScheme="teal"
-                >
-                    Post a story
-                </Button>
-            </ChakraLink>
+            <InternalLink to="/stories/post-story" ariaLabel="Post a story" text="Post a story"/>
             {isLoading ? <Spinner/> :
             (
                 <>
