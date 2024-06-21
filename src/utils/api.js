@@ -28,6 +28,13 @@ export const fetchArticleById = (article_id) => {
     );
 }
 
+export const deleteArticle = (article_id) => {
+    return newsApi.delete(`/articles/${article_id}`)
+    .catch(error => {
+        throw error;
+    });
+}
+
 export const fetchArticleComments = (article_id) => {
     return newsApi.get(`/articles/${article_id}/comments`).then(({ data }) => data)
     .catch(error => {
