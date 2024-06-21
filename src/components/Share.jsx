@@ -1,4 +1,4 @@
-import { Flex, IconButton } from "@chakra-ui/react";
+import { Flex, IconButton, Box } from "@chakra-ui/react";
 import { RedditIcon, RedditShareButton, WhatsappIcon, WhatsappShareButton, EmailIcon, EmailShareButton, LinkedinIcon, LinkedinShareButton, FacebookIcon, FacebookShareButton } from "react-share";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FaRegCopy } from "react-icons/fa";
@@ -8,30 +8,40 @@ const Share = ({ url, title }) => {
         alert('URL copied to clipboard!');
     };
 
+    const shareButtonData = [
+        { as: RedditShareButton, icon: RedditIcon, label: "Share on Reddit" },
+        { as: WhatsappShareButton, icon: WhatsappIcon, label: "Share on WhatsApp" },
+        { as: LinkedinShareButton, icon: LinkedinIcon, label: "Share on LinkedIn" },
+        { as: FacebookShareButton, icon: FacebookIcon, label: "Share on Facebook" },
+        { as: EmailShareButton, icon: EmailIcon, label: "Share via Email" }
+    ];
+
     return (
         <Flex justify="space-around" w="250px">
-            <RedditShareButton aria-label="Share on Reddit" url={url} title={title}>
-                <RedditIcon size={38} round />
-            </RedditShareButton>
-
-            <WhatsappShareButton aria-label="Share on WhatsApp" url={url} title={title}>
-                <WhatsappIcon size={38} round />
-            </WhatsappShareButton>
-
-            <LinkedinShareButton aria-label="Share on LinkedIn" url={url} title={title}>
-                <LinkedinIcon size={38} round />
-            </LinkedinShareButton>
-
-            <FacebookShareButton aria-label="Share on Facebook" url={url}>
-                <FacebookIcon size={38} round />
-            </FacebookShareButton>
-
-            <EmailShareButton aria-label="Share via email" url={url} subject={title} body="Check out this post!">
-                <EmailIcon size={38} round />
-            </EmailShareButton>
+            {shareButtonData.map((button, index) => (
+                <Box
+                    key={index}
+                    as={button.as}
+                    url={url}
+                    title={title}
+                    rounded="full"
+                    _hover={{ transform: "scale(1.1)" }}
+                    transition="transform 0.2s"
+                    aria-label={button.label}
+                >
+                    <button.icon size={38} round />
+                </Box>
+            ))}
 
             <CopyToClipboard text={url} onCopy={handleCopy}>
-                <IconButton aria-label="Copy URL" isRound={true} icon={<FaRegCopy />} />
+                <IconButton
+                    aria-label="Copy URL"
+                    icon={<FaRegCopy />}
+                    size="md"
+                    isRound
+                    _hover={{ transform: "scale(1.1)" }}
+                    transition="transform 0.2s"
+                />
             </CopyToClipboard>
         </Flex>
     )
