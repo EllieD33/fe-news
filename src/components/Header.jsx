@@ -5,6 +5,7 @@ import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { LuNewspaper } from "react-icons/lu";
 import { fetchAllTopics } from "../utils/api";
 import { capitaliseFirstLetter } from '../utils/helpers';
+import UserMenu from './UserMenu';
 
 const Header = () => {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -22,6 +23,7 @@ const Header = () => {
             <Flex m={2} justify="space-between" align="center" >
                 <Icon as={LuNewspaper} boxSize={10} />
                 <Heading as="h1" textAlign="center" flex="1">NewsHub</Heading>
+                <UserMenu/>
                 <IconButton
                         ml={2}
                         onClick={toggleColorMode}
