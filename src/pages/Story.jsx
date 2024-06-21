@@ -9,7 +9,8 @@ import {
     Icon,
     Link as ChakraLink,
     Spinner,
-    IconButton
+    IconButton,
+    Image
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { FaRegCommentAlt } from "react-icons/fa";
@@ -80,7 +81,7 @@ const Story = () => {
                         maxW="70%"
                         alignItems="center"
                     >
-                        <Heading fontSize="3xl" textAlign="center">
+                        <Heading mb={2} fontSize={ {base: "2xl", sm: "3xl"}} textAlign="center">
                             {story && story.title}
                         </Heading>
                         <Text>
@@ -98,6 +99,7 @@ const Story = () => {
                                 {capitaliseFirstLetter(story.topic)}
                             </ChakraLink>
                         </Flex>
+                        <Image maxW="500px" src={story.article_img_url} alt="Image relating to story" />
                         <Text my={2} maxW="80%" minW="320px">
                             {story.body}
                         </Text>
