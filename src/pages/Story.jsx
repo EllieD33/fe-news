@@ -9,11 +9,12 @@ import {
     Link as ChakraLink,
     Spinner,
     IconButton,
-    Image
+    Image,
+    SkipNavContent
 } from "@chakra-ui/react";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { GrShareOption } from "react-icons/gr";
-import { fetchArticleById, fetchArticleComments, deleteArticle } from "../utils/api";
+import { fetchArticleById, deleteArticle } from "../utils/api";
 import { formatDate, capitaliseFirstLetter } from "../utils/helpers";
 import UserContext from "../contexts/UserContext";
 import VoteForm from "../components/forms/VoteForm";
@@ -72,65 +73,68 @@ const Story = () => {
     const articleUrl = `${window.location.origin}/article/${article_id}`;
 
     return (
-        <Flex m={4} as="main" direction="column" align="center">
-            {storyDeleted && 
-                <Flex direction="column">
-                    <Heading fontSize="2xl" m={4} textAlign="center" >Story successfully deleted</Heading>
-                    <Image boxSize="md" src="https://images.pexels.com/photos/850216/pexels-photo-850216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="bin with balled up paper inside" />
-                </Flex>
-            }
-            {isLoading && <Spinner />}
-            {!isLoading && !storyDeleted &&
-                <>
-                    <Flex
-                        as="article"
-                        direction="column"
-                        m={4}
-                        maxW="70%"
-                        alignItems="center"
-                    >
-                        <Heading mb={2} fontSize={ {base: "2xl", sm: "3xl"}} textAlign="center">
-                            {story && story.title}
-                        </Heading>
-                        <Text>
-                            By <Box as="strong">{story.author}</Box> on{" "}
-                            <Box as="strong">
-                                {formatDate(story.created_at)}
-                            </Box>
-                        </Text>
-                        <Flex>
-                            <Text mr={2}>In: </Text>
-                            <ChakraLink
-                                as={ReactRouterLink}
-                                to={`/topics/${story.topic}`}
-                            >
-                                {capitaliseFirstLetter(story.topic)}
-                            </ChakraLink>
-                        </Flex>
-                        {story.author === loggedInUser.username && 
-                            <Flex>
-                                <DeleteButton thingBeingDeleted={'story'} onDelete={onDelete} isDeleting={isDeleting} />
-                                {errors.deleteFailed && <Text fontSize="sm" color="red" >{errors.deleteFailed}</Text> }
-                            </Flex>
-                        }
-                        <Image maxW="500px" src={story.article_img_url} alt="Image relating to story" />
-                        <Text my={2} maxW="80%" minW="320px">
-                            {story.body}
-                        </Text>
-                        <Flex w="100%" justify="space-around" align="center">
-                            <VoteForm story={story} setStory={setStory} />
-                            <Flex align="center">
-                                <Icon as={FaRegCommentAlt} color="teal.700" />
-                                <Text pl={2}>{`${story.comment_count}`}</Text>
-                            </Flex>
-                            <IconButton onClick={handleShareClick} isRound={true} icon={<GrShareOption />}/>
-                        </Flex>
+        <>
+            <SkipNavContent />
+            <Flex m={4} as="main" direction="column" align="center">
+                {storyDeleted && 
+                    <Flex direction="column">
+                        <Heading fontSize="2xl" m={4} textAlign="center" >Story successfully deleted</Heading>
+                        <Image boxSize="md" src="https://images.pexels.com/photos/850216/pexels-photo-850216.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="bin with balled up paper inside" />
                     </Flex>
-                    {shareIconsVisible && <Share title={story.title} url={articleUrl} />}
-                    <CommentThread article_id={article_id}/> 
-                </>
-            }
-        </Flex>
+                }
+                {isLoading && <Spinner />}
+                {!isLoading && !storyDeleted &&
+                    <>
+                        <Flex
+                            as="article"
+                            direction="column"
+                            m={4}
+                            maxW="70%"
+                            alignItems="center"
+                        >
+                            <Heading mb={2} fontSize={ {base: "2xl", sm: "3xl"}} textAlign="center">
+                                {story && story.title}
+                            </Heading>
+                            <Text>
+                                By <Box as="strong">{story.author}</Box> on{" "}
+                                <Box as="strong">
+                                    {formatDate(story.created_at)}
+                                </Box>
+                            </Text>
+                            <Flex>
+                                <Text mr={2}>In: </Text>
+                                <ChakraLink
+                                    as={ReactRouterLink}
+                                    to={`/topics/${story.topic}`}
+                                >
+                                    {capitaliseFirstLetter(story.topic)}
+                                </ChakraLink>
+                            </Flex>
+                            {story.author === loggedInUser.username && 
+                                <Flex>
+                                    <DeleteButton thingBeingDeleted={'story'} onDelete={onDelete} isDeleting={isDeleting} />
+                                    {errors.deleteFailed && <Text fontSize="sm" color="red" >{errors.deleteFailed}</Text> }
+                                </Flex>
+                            }
+                            <Image maxW="500px" src={story.article_img_url} alt="Image relating to story" />
+                            <Text my={2} maxW="80%" minW="320px">
+                                {story.body}
+                            </Text>
+                            <Flex w="100%" justify="space-around" align="center">
+                                <VoteForm story={story} setStory={setStory} />
+                                <Flex align="center">
+                                    <Icon as={FaRegCommentAlt} color="teal.700" />
+                                    <Text pl={2}>{`${story.comment_count}`}</Text>
+                                </Flex>
+                                <IconButton onClick={handleShareClick} isRound={true} icon={<GrShareOption />}/>
+                            </Flex>
+                        </Flex>
+                        {shareIconsVisible && <Share title={story.title} url={articleUrl} />}
+                        <CommentThread article_id={article_id}/> 
+                    </>
+                }
+            </Flex>
+        </>
     );
 };
 

@@ -22,8 +22,8 @@ const Footer = () => {
     }, []);
 
     return (
-        <Flex as="footer" justify="center" my={2} >
-            {isVisible && (<Button size="sm" colorScheme="teal" variant="outline" onClick={handleScrollToTop} leftIcon={<Icon as={FaArrowCircleUp} boxSize={4} />}>
+        <Flex as="footer" justify="center" mt={2} h="auto">
+            {isVisible && (<Button mb={10} size="sm" colorScheme="teal" variant="outline" onClick={handleScrollToTop} leftIcon={<Icon as={FaArrowCircleUp} boxSize={4} />}>
                 Back to top
             </Button>)}
         </Flex>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Flex, Text, Heading } from "@chakra-ui/react";
+import { Flex, Text, Heading, SkipNavContent } from "@chakra-ui/react";
 import { fetchAllArticles } from "../utils/api";
 import FeaturedStories from "../components/containers/FeaturedStories";
 
@@ -29,16 +29,19 @@ const Home = () => {
     }, [])
 
     return (
-        <Flex id="main" as="main" pt={4} direction="column" alignItems="center" >
-            <section >
-                <Heading fontSize="3xl" textAlign="center">Welcome to NewsHub</Heading>
-                <Text mx={2} textAlign="center">Enjoy your time here, and remember: It's nice to be nice!!!</Text>
-            </section>
-            <Flex wrap="wrap" align="flex-start" justify="center">
-                <FeaturedStories title="What's new" subtitle="Recently added stories" stories={recentStories} isLoading={isLoading} />
-                <FeaturedStories title="Trending" subtitle="Most popular stories" stories={mostPopularStories} isLoading={isLoading} />
+        <>
+            <SkipNavContent />
+            <Flex id="main" as="main" pt={4} direction="column" alignItems="center" >
+                <section >
+                    <Heading fontSize="3xl" textAlign="center">Welcome to NewsHub</Heading>
+                    <Text mx={2} textAlign="center">Enjoy your time here, and remember: It's nice to be nice!!!</Text>
+                </section>
+                <Flex wrap="wrap" align="flex-start" justify="center">
+                    <FeaturedStories title="What's new" subtitle="Recently added stories" stories={recentStories} isLoading={isLoading} />
+                    <FeaturedStories title="Trending" subtitle="Most popular stories" stories={mostPopularStories} isLoading={isLoading} />
+                </Flex>
             </Flex>
-    </Flex>
+        </>
     )
 }
 

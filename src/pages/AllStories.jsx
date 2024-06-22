@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import { Flex, Spinner, Heading } from "@chakra-ui/react";
+import { Flex, Spinner, Heading, SkipNavContent } from "@chakra-ui/react";
 import { fetchAllArticles } from "../utils/api";
 import TopicFilter from "../components/forms/TopicFilter";
 import Topic from "../components/containers/Topic";
@@ -32,17 +32,20 @@ const AllStories = () => {
     const showTopicFilter = location.pathname === "/stories";
     
     return (
-        <Flex as="main" pt={4} direction="column" alignItems="center" >
-            <Heading>Stories</Heading>
-            <InternalLink to="/stories/post-story" ariaLabel="Post a story" text="Post a story"/>
-            {isLoading ? <Spinner/> :
-            (
-                <>
-                    {showTopicFilter && <TopicFilter onTopicChange={handleTopicChange} />}
-                    <Topic topic={topic} setStories={setStories} stories={stories} />
-                </>
-            )}
-        </Flex>
+        <>
+            <SkipNavContent />
+            <Flex as="main" pt={4} direction="column" alignItems="center" >
+                <Heading>Stories</Heading>
+                <InternalLink to="/stories/post-story" ariaLabel="Post a story" text="Post a story"/>
+                {isLoading ? <Spinner/> :
+                (
+                    <>
+                        {showTopicFilter && <TopicFilter onTopicChange={handleTopicChange} />}
+                        <Topic topic={topic} setStories={setStories} stories={stories} />
+                    </>
+                )}
+            </Flex>
+        </>
     )
 }
 

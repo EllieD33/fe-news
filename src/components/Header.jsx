@@ -19,7 +19,7 @@ const Header = () => {
     }, [])
 
     return (
-        <Flex as="header" direction="column" borderBottom="1px" borderColor="teal.600" >
+        <Flex as="header" direction="column" bg="white" borderBottom="1px" borderColor="teal.600" boxShadow="0px 6px 8px 0px rgba(40, 94, 97, 1)" position="sticky" top="0" zIndex="10">
             <Flex m={2} justify="space-between" align="center" >
                 <Icon as={LuNewspaper} boxSize={10} />
                 <Heading as="h1" textAlign="center" flex="1">NewsHub</Heading>
@@ -41,7 +41,6 @@ const Header = () => {
                 </ChakraLink>
                 <Text mx={4} >|</Text>
                 <TopicMenu />
-                
             </Flex>
         </Flex>
     )

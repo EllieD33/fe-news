@@ -77,7 +77,7 @@ export const getAllUsers = () => {
     });
 }
 
-export const getUserbyUsername = (username) => {
+export const getUserByUsername = (username) => {
     return newsApi.get(`/users/${username}`).then(({ data }) => data)
     .catch(error => {
         throw error;

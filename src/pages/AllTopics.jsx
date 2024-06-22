@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Flex, Heading, Spinner, Text, Button, Icon } from "@chakra-ui/react"
+import { Flex, Heading, Spinner, Text, Button, Icon, SkipNavContent } from "@chakra-ui/react"
 import { AddIcon } from "@chakra-ui/icons"
 import TopicCard from "../components/cards/TopicCard"
 import { fetchAllTopics } from "../utils/api"
@@ -26,31 +26,34 @@ const AllTopics = () => {
     }, [])
 
     return (
-        <Flex mt={10} as="main" justify="center" align="center" direction="column" >
-            <Heading fontSize="3xl">All topics</Heading>
-            <Text textAlign="center" p={2}>Can't find what you're looking for? You could add your own topic.</Text>
-            {showTopicFormButton && (
-                <Button mb={2}
-                w="150px"
-                leftIcon={<Icon as={AddIcon} />}
-                size="sm"
-                colorScheme="teal"
-                bg="teal.700"
-                _hover={{ bg: 'teal.500' }}
-                sx={{ svg: { color: "whiteAlpha.900" } }}
-                onClick={handleAddTopicClick}
-                >
-                                Add topic
-                            </Button>
-                        )}
-            {newTopicFormIsVisible && <NewTopicForm topics={topics} setTopics={setTopics} setNewTopicFormIsVisible={setNewTopicFormIsVisible} setShowTopicFormButton={setShowTopicFormButton} setSuccessMessage={setSuccessMessage} />}
-            {successMessage && <Text m={2} >Topic added successfully!</Text>}
-            {isLoading ? <Spinner/> :
-                topics.map((topic) => (
-                    <TopicCard topic={topic.slug} key={topic.slug} description={topic.description} />
-                ))
-            }
-        </Flex>
+        <>
+            <SkipNavContent />
+            <Flex mt={10} as="main" justify="center" align="center" direction="column" >
+                <Heading fontSize="3xl">All topics</Heading>
+                <Text textAlign="center" p={2}>Can't find what you're looking for? You could add your own topic.</Text>
+                {showTopicFormButton && (
+                    <Button mb={2}
+                    w="150px"
+                    leftIcon={<Icon as={AddIcon} />}
+                    size="sm"
+                    colorScheme="teal"
+                    bg="teal.700"
+                    _hover={{ bg: 'teal.500' }}
+                    sx={{ svg: { color: "whiteAlpha.900" } }}
+                    onClick={handleAddTopicClick}
+                    >
+                                    Add topic
+                                </Button>
+                            )}
+                {newTopicFormIsVisible && <NewTopicForm topics={topics} setTopics={setTopics} setNewTopicFormIsVisible={setNewTopicFormIsVisible} setShowTopicFormButton={setShowTopicFormButton} setSuccessMessage={setSuccessMessage} />}
+                {successMessage && <Text m={2} >Topic added successfully!</Text>}
+                {isLoading ? <Spinner/> :
+                    topics.map((topic) => (
+                        <TopicCard topic={topic.slug} key={topic.slug} description={topic.description} />
+                    ))
+                }
+            </Flex>
+        </>
     )
 }
 

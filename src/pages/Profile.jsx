@@ -1,7 +1,7 @@
 import { UserContext } from "../contexts/UserContext";
 import { useContext, useEffect, useState } from "react";
 import { Flex, Heading, Image, Spinner, Text } from "@chakra-ui/react";
-import { getUserbyUsername, fetchAllArticles } from "../utils/api"
+import { getUserByUsername, fetchAllArticles } from "../utils/api"
 import PreviewCard from "../components/cards/PreviewCard";
 import InternalLink from "../components/InternalLink";
 
@@ -13,7 +13,7 @@ const Profile = () => {
 
     useEffect(() => {
         if (loggedInUser) {
-        getUserbyUsername(loggedInUser.username).then((data) => {
+        getUserByUsername(loggedInUser.username).then((data) => {
             const { user } = data
             setUserDetails(user)
             setIsLoading(false);
@@ -35,30 +35,32 @@ const Profile = () => {
     }, [loggedInUser])
 
     return (
-        <Flex mt={4} justify="center" direction="column" align="center" >
-            {isLoading && <Spinner/>}
-            {!isLoading &&
-                <>
-                <Heading fontSize="3xl">{userDetails.name}</Heading>
-                <Image m={4} src={userDetails.avatar_url} alt={`${userDetails.name}'s avatar`} /> 
-                <Heading mt={4} as="h3" fontSize="2xl" >Your Posts</Heading>
-                <Flex wrap="wrap" justify="center" >
-                    {usersStories &&
-                        usersStories.map((story) => (
-                            <PreviewCard key={story.article_id} article={story} />
-                        ))
-                    }
-                </Flex>
-                {!usersStories && 
+        <>
+            <SkipNavContent />
+            <Flex mt={4} justify="center" direction="column" align="center" >
+                {isLoading && <Spinner/>}
+                {!isLoading &&
                     <>
-                    <Text m={2} >You haven't written anything yet.</Text>
-                    <InternalLink text="Post your first story!" ariaLabel="Post your first story" to={"/stories/post-story"}  />
+                    <Heading fontSize="3xl">{userDetails.name}</Heading>
+                    <Image m={4} src={userDetails.avatar_url} alt={`${userDetails.name}'s avatar`} /> 
+                    <Heading mt={4} as="h3" fontSize="2xl" >Your Posts</Heading>
+                    <Flex wrap="wrap" justify="center" >
+                        {usersStories &&
+                            usersStories.map((story) => (
+                                <PreviewCard key={story.article_id} article={story} />
+                            ))
+                        }
+                    </Flex>
+                    {!usersStories && 
+                        <>
+                        <Text m={2} >You haven't written anything yet.</Text>
+                        <InternalLink text="Post your first story!" ariaLabel="Post your first story" to={"/stories/post-story"}  />
+                        </>
+                    }
                     </>
                 }
-                </>
-    
-            }
-        </Flex>
+            </Flex>
+        </>
     )
 }
 
