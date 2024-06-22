@@ -36,7 +36,7 @@ const Header = () => {
                     <Text>Home</Text>
                 </ChakraLink>
                 <Text mx={4} >|</Text>
-                <ChakraLink as={ReactRouterLink} to="/stories"   >
+                <ChakraLink as={ReactRouterLink} to="/stories" >
                     <Text>Stories</Text>
                 </ChakraLink>
                 <Text mx={4} >|</Text>
