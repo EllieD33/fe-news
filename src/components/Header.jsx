@@ -21,7 +21,7 @@ const Header = () => {
 
     return (
         <Flex as="header" direction="column" bg={bg} borderBottom="1px" borderColor="teal.600" boxShadow="0px 6px 8px 0px rgba(40, 94, 97, 1)" position="sticky" top="0" zIndex="10">
-            <Flex m={2} justify="space-between" align="center" >
+            <Flex mx={2} mt={2} justify="space-between" align="center" >
                 <Icon as={LuNewspaper} boxSize={10} />
                 <Heading as="h1" textAlign="center" flex="1">NewsHub</Heading>
                 <UserMenu/>
@@ -32,7 +32,7 @@ const Header = () => {
                         icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                     />
             </Flex>
-            <Flex wrap="wrap" as="nav" justify="center" mb={4} align="center" >
+            <Flex wrap="wrap" as="nav" justify="center"  align="center" >
                 <ChakraLink as={ReactRouterLink} to="/home" >
                     <Text>Home</Text>
                 </ChakraLink>

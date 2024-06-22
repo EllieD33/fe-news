@@ -31,7 +31,7 @@ const Home = () => {
     return (
         <>
             <SkipNavContent />
-            <Flex id="main" as="main" pt={4} direction="column" alignItems="center" >
+            <Flex id="main" as="main" pt={6} direction="column" alignItems="center" >
                 <section >
                     <Heading fontSize="3xl" textAlign="center">Welcome to NewsHub</Heading>
                     <Text mx={2} textAlign="center">Enjoy your time here, and remember: It's nice to be nice!!!</Text>
