@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link as ReactRouterLink } from 'react-router-dom'
-import { useColorMode, IconButton, Box, Heading, Flex, Icon, Link as ChakraLink, Text } from "@chakra-ui/react";
+import { useColorMode, IconButton, useColorModeValue, Heading, Flex, Icon, Link as ChakraLink, Text } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { LuNewspaper } from "react-icons/lu";
 import { fetchAllTopics } from "../utils/api";
@@ -10,6 +10,7 @@ import TopicMenu from './TopicMenu';
 const Header = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const [topics, setTopics] = useState([]);
+    const bg = useColorModeValue("white", "gray.800");
 
     useEffect(() => {
         fetchAllTopics().then(({ topics }) => {
@@ -19,7 +20,7 @@ const Header = () => {
     }, [])
 
     return (
-        <Flex as="header" direction="column" bg="white" borderBottom="1px" borderColor="teal.600" boxShadow="0px 6px 8px 0px rgba(40, 94, 97, 1)" position="sticky" top="0" zIndex="10">
+        <Flex as="header" direction="column" bg={bg} borderBottom="1px" borderColor="teal.600" boxShadow="0px 6px 8px 0px rgba(40, 94, 97, 1)" position="sticky" top="0" zIndex="10">
             <Flex m={2} justify="space-between" align="center" >
                 <Icon as={LuNewspaper} boxSize={10} />
                 <Heading as="h1" textAlign="center" flex="1">NewsHub</Heading>
