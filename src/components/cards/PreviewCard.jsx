@@ -9,8 +9,8 @@ const PreviewCard = ({ article }) => {
     const article_id = article.article_id;
 
     return (
-        <Card as="article" w={[300, 400, 500]} minW="300px" minH="180px" m={4} p={2} transition="all 0.2s" _hover={{ transform: "translateY(-4px)", shadow: "lg"}} >
-            <Heading fontSize="lg" as="h4">{article.title}</Heading>
+        <Card as="article" w={[300, 400, 500]} boxShadow="0px 6px 8px 0px rgba(40, 94, 97, 1)" display="flex" direction="column" justify="space-around" minW="300px" minH="195px" m={4} px={3} py={3} transition="all 0.2s" _hover={{ transform: "translateY(-4px)", boxShadow: "0px 10px 15px 0px rgba(40, 94, 97, 1)" }} >
+            <Heading fontSize="lg" as="h4" mb={1} >{article.title}</Heading>
             <Flex alignItems="center" justify="space-between" flexDirection={{ base: "column", md: "row" }}>
                 <Flex w="100%" align="center">
                     <Image src={article.article_img_url} alt="image related to article" borderRadius="5px" objectFit='cover' boxSize="100px" />
@@ -39,7 +39,7 @@ const PreviewCard = ({ article }) => {
                         </Flex>
                     </Flex>
                 </Flex>
-                <Flex alignSelf={{base: "flex-start", md: "flex-end"}}  >
+                <Flex pt={1} alignSelf={{base: "flex-start", md: "flex-end"}}  >
                     <InternalLink to={`/stories/${article_id}`} ariaLabel="Read story" text="Read story" alignSelf={{ base: "flex-start", md: "flex-end" }} />
                 </Flex>
             </Flex>
