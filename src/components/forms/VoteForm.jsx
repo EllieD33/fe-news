@@ -29,6 +29,7 @@ const VoteForm = ({ story, setStory }) => {
         const voteDifference = newVote - currentVote;
         const originalVotes = story.votes;
 
+        setCurrentVote(newVote);
         setStory(prevStory => ({
             ...prevStory,
             votes: prevStory.votes + voteDifference
@@ -37,7 +38,6 @@ const VoteForm = ({ story, setStory }) => {
         updateArticleVotes(story.article_id, voteDifference).then((updatedStory) => {
             const { article } = updatedStory;
             setStory({ ...article, comment_count: commentCount });
-            setCurrentVote(newVote);
             
             const votes = JSON.parse(localStorage.getItem('userVotes')) || {};
             if (newVote === 0) {
@@ -47,6 +47,7 @@ const VoteForm = ({ story, setStory }) => {
             }
             localStorage.setItem('userVotes', JSON.stringify(votes));
         }).catch((error) => {
+            setCurrentVote(currentVote);
             setStory(prevStory => ({
                 ...prevStory,
                 votes: originalVotes
