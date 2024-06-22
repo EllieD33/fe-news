@@ -9,7 +9,7 @@ const PreviewCard = ({ article }) => {
     const article_id = article.article_id;
 
     return (
-        <Card as="article" w={[300, 400, 500]} minW="300px" m={4} p={2} transition="all 0.2s" _hover={{ transform: "translateY(-4px)", shadow: "lg"}} >
+        <Card as="article" w={[300, 400, 500]} minW="300px" minH="180px" m={4} p={2} transition="all 0.2s" _hover={{ transform: "translateY(-4px)", shadow: "lg"}} >
             <Heading fontSize="lg" as="h4">{article.title}</Heading>
             <Flex alignItems="center" justify="space-between" flexDirection={{ base: "column", md: "row" }}>
                 <Flex w="100%" align="center">
