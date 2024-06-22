@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link as ReactRouterLink } from 'react-router-dom'
-import { useColorMode, IconButton, Heading, Flex, Icon, Link as ChakraLink, Text } from "@chakra-ui/react";
+import { useColorMode, IconButton, Box, Heading, Flex, Icon, Link as ChakraLink, Text } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { LuNewspaper } from "react-icons/lu";
 import { fetchAllTopics } from "../utils/api";
-import { capitaliseFirstLetter } from '../utils/helpers';
 import UserMenu from './UserMenu';
+import TopicMenu from './TopicMenu';
 
 const Header = () => {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -31,25 +31,17 @@ const Header = () => {
                         icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                     />
             </Flex>
-            <Flex wrap="wrap" as="nav" justify="center" m={4} >
+            <Flex wrap="wrap" as="nav" justify="center" mb={4} align="center" >
                 <ChakraLink as={ReactRouterLink} to="/home" >
                     <Text>Home</Text>
                 </ChakraLink>
                 <Text mx={4} >|</Text>
-                <ChakraLink as={ReactRouterLink} to="/stories">
-                    <Text>All stories</Text>
+                <ChakraLink as={ReactRouterLink} to="/stories"   >
+                    <Text>Stories</Text>
                 </ChakraLink>
                 <Text mx={4} >|</Text>
-                {
-                    topics.map((topic, index) => (
-                        <Flex key={topic.slug}>
-                            <ChakraLink as={ReactRouterLink} to={`topics/${topic.slug}`} >
-                                <Text>{capitaliseFirstLetter(topic.slug)}</Text>
-                            </ChakraLink>
-                            {index !== topics.length - 1 && <Text mx={4}>|</Text>}
-                        </Flex>
-                    ))
-                }
+                <TopicMenu />
+                
             </Flex>
         </Flex>
     )
