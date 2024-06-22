@@ -37,7 +37,8 @@ const NewCommentForm = ({ setComments, comments, article_id, setCommentFormIsVis
             setNewComment('');
             setErrors({}); 
             setIsLoading(false);
-            setCommentFormIsVisible(false)
+            setCommentFormIsVisible(false);
+            setShowCommentFormButton(true);
         }).catch((error) => {
             console.error('Error posting comment:', error);
             setComments(comments);
