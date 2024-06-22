@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { IconButton, Text, Flex } from "@chakra-ui/react";
 import { TiArrowDownOutline, TiArrowUpOutline } from "react-icons/ti";
 import { UserContext } from "../../contexts/UserContext";
@@ -9,6 +9,12 @@ const VoteForm = ({ story, setStory }) => {
     const [hasVoted, setHasVoted] = useState(false);
     const [isVoting, setIsVoting] = useState(false); 
     const [commentCount, setCommentCount] = useState(story.comment_count);
+
+    useEffect(() => {
+        const userVoteKey = `${loggedInUser.username}_voted_${story.article_id}`;
+        const userHasVoted = localStorage.getItem(userVoteKey) === 'true';
+        setHasVoted(userHasVoted);
+    }, [loggedInUser.username, story.article_id]);
 
     const handleVote = (event) => {
         event.preventDefault();
@@ -34,6 +40,8 @@ const VoteForm = ({ story, setStory }) => {
             setStory({...article, comment_count: commentCount});
             setHasVoted(true);
             setIsVoting(false);
+            const userVoteKey = `${loggedInUser.username}_voted_${story.article_id}`;
+            localStorage.setItem(userVoteKey, 'true');
         }).catch((error) => {
             setStory(prevStory => ({
                 ...prevStory,
