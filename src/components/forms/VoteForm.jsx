@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { IconButton, Text, Flex } from "@chakra-ui/react";
+import { IconButton, Text, Flex, useToast } from "@chakra-ui/react";
 import { TiArrowDownOutline, TiArrowUpOutline, TiArrowUpThick, TiArrowDownThick } from "react-icons/ti";
 import { UserContext } from "../../contexts/UserContext";
 import { updateArticleVotes } from "../../utils/api";
@@ -9,14 +9,17 @@ const VoteForm = ({ story, setStory }) => {
     const [currentVote, setCurrentVote] = useState(0);
     const [isVoting, setIsVoting] = useState(false); 
     const [commentCount, setCommentCount] = useState(story.comment_count);
+    const toast = useToast();
 
     useEffect(() => {
-        const votes = JSON.parse(localStorage.getItem('userVotes')) || {};
-        const userVote = votes[`${loggedInUser.username}_${story.article_id}`];
-        if (userVote !== undefined) {
-            setCurrentVote(userVote);
+        if (loggedInUser) {
+            const votes = JSON.parse(localStorage.getItem('userVotes')) || {};
+            const userVote = votes[`${loggedInUser.username}_${story.article_id}`];
+            if (userVote !== undefined) {
+                setCurrentVote(userVote);
+            }
         }
-    }, [loggedInUser.username, story.article_id]);
+    }, [loggedInUser, story.article_id]);
 
     const handleVote = (event) => {
         event.preventDefault();
@@ -58,11 +61,25 @@ const VoteForm = ({ story, setStory }) => {
         });
     }
 
+    const handleClick = (event) => {
+        if (!loggedInUser) {
+            toast({
+                title: "You must be logged in to vote.",
+                status: "warning",
+                duration: 3000,
+                isClosable: true,
+            });
+            event.preventDefault();
+        } else {
+            handleVote(event);
+        }
+    };
+
     return (
         <Flex as="form" align="center">
             <IconButton 
-                type="submit" 
-                onClick={handleVote} 
+                type="button" 
+                onClick={handleClick} 
                 isDisabled={isVoting} 
                 name="downVote" 
                 border="none" 
@@ -76,8 +93,8 @@ const VoteForm = ({ story, setStory }) => {
             />
             <Text>{`${story.votes}`}</Text>
             <IconButton 
-                type="submit" 
-                onClick={handleVote} 
+                type="button" 
+                onClick={handleClick} 
                 isDisabled={isVoting} 
                 name="upVote" 
                 border="none" 

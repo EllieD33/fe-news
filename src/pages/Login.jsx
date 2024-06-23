@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { Button, Flex, Heading, Text, SkipNavContent } from "@chakra-ui/react";
 import LoginForm from "../components/forms/LoginForm";
@@ -7,6 +7,13 @@ const Login = () => {
     const { loggedInUser, setLoggedInUser } = useContext(UserContext);
     const [loginIsVisible, setLoginIsVisible] = useState(true);
     const [successMessage, setSuccessMessage] = useState(false);
+
+    useEffect(() => {
+        if (loggedInUser) {
+            setLoginIsVisible(false);
+            setSuccessMessage(true);
+        }
+    }, [loggedInUser]);
 
     const handleLogoutClick = () => {
         setLoggedInUser(null);

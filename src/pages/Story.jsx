@@ -110,7 +110,7 @@ const Story = () => {
                                     {capitaliseFirstLetter(story.topic)}
                                 </ChakraLink>
                             </Flex>
-                            {story.author === loggedInUser.username && 
+                            {loggedInUser && story.author === loggedInUser.username && 
                                 <Flex>
                                     <DeleteButton thingBeingDeleted={'story'} onDelete={onDelete} isDeleting={isDeleting} />
                                     {errors.deleteFailed && <Text fontSize="sm" color="red" >{errors.deleteFailed}</Text> }

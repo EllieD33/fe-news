@@ -15,9 +15,9 @@ import Profile from './pages/Profile';
 function App() {
   const { setLoggedInUser } = useContext(UserContext);
 
-  useEffect(() => {
-    setLoggedInUser({ username: 'cooljmessy' });
-  }, [setLoggedInUser]);
+  // useEffect(() => {
+  //   setLoggedInUser({ username: 'cooljmessy' });
+  // }, [setLoggedInUser]);
 
   return (
     <>

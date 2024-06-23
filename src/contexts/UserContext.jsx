@@ -6,14 +6,23 @@ export const UserProvider = ({ children }) => {
     const [loggedInUser, setLoggedInUser] = useState(null);
 
     useEffect(() => {
-        const storedUser = JSON.parse(localStorage.getItem("loggedInUser"));
+        const storedUser = localStorage.getItem("loggedInUser");
         if (storedUser) {
             setLoggedInUser(storedUser);
         }
     }, []);
 
+    const setLoggedInUserWithStorage = (user) => {
+        if (user) {
+            localStorage.setItem("loggedInUser", user);
+        } else {
+            localStorage.removeItem("loggedInUser");
+        }
+        setLoggedInUser(user);
+    };
+
     return (
-        <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
+        <UserContext.Provider value={{ loggedInUser, setLoggedInUser: setLoggedInUserWithStorage  }}>
             {children}
         </UserContext.Provider>
     );

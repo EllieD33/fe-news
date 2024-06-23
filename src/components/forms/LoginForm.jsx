@@ -4,7 +4,7 @@ import { FormControl, FormHelperText, FormLabel, Select, Flex, Button } from "@c
 import { getAllUsers } from "../../utils/api";
 
 const LoginForm = ({ setSuccessMessage, setLoginIsVisible }) => {
-    const { setLoggedInUser } = useContext(UserContext);
+    const { loggedInUser, setLoggedInUser } = useContext(UserContext);
     const [userList, setUserList] = useState([])
     const [selectedUsername, setSelectedUsername] = useState('');
 
@@ -12,7 +12,8 @@ const LoginForm = ({ setSuccessMessage, setLoginIsVisible }) => {
         setSelectedUsername(event.target.value);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         setLoggedInUser(selectedUsername);
         setLoginIsVisible(false);
         setSuccessMessage(true);

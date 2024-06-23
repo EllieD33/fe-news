@@ -1,6 +1,7 @@
 import { UserContext } from "../contexts/UserContext";
 import { useContext, useEffect, useState } from "react";
-import { Flex, Heading, Image, Spinner, Text } from "@chakra-ui/react";
+import { Link as ReactRouterLink } from "react-router-dom";
+import { Flex, Heading, Image, Spinner, Text, SkipNavContent, Link as ChakraLink } from "@chakra-ui/react";
 import { getUserByUsername, fetchAllArticles } from "../utils/api"
 import PreviewCard from "../components/cards/PreviewCard";
 import InternalLink from "../components/InternalLink";
@@ -13,14 +14,14 @@ const Profile = () => {
 
     useEffect(() => {
         if (loggedInUser) {
-        getUserByUsername(loggedInUser.username).then((data) => {
+        getUserByUsername(loggedInUser).then((data) => {
             const { user } = data
             setUserDetails(user)
             setIsLoading(false);
         })
         .catch((error) => {
+            console.log(error)
             setIsLoading(false);
-            setDataFetchFailed(true);
         });
     }
     }, [loggedInUser])
@@ -37,8 +38,9 @@ const Profile = () => {
     return (
         <>
             <SkipNavContent />
-            <Flex mt={4} justify="center" direction="column" align="center" >
-                {isLoading && <Spinner/>}
+            <Flex as="main" mt={4} justify="center" direction="column" align="center" >
+                {loggedInUser && isLoading && <Spinner/>}
+                {!loggedInUser && <Text mt={10} >You are not logged in. Please <ChakraLink as={ReactRouterLink} to="/login">log in</ChakraLink> to view you profile.</Text>}
                 {!isLoading &&
                     <>
                     <Heading fontSize="3xl">{userDetails.name}</Heading>
@@ -51,7 +53,7 @@ const Profile = () => {
                             ))
                         }
                     </Flex>
-                    {!usersStories && 
+                    {usersStories.length === 0 && 
                         <>
                         <Text m={2} >You haven't written anything yet.</Text>
                         <InternalLink text="Post your first story!" ariaLabel="Post your first story" to={"/stories/post-story"}  />
