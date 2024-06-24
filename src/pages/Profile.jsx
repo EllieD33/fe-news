@@ -44,7 +44,7 @@ const Profile = () => {
                 {!isLoading &&
                     <>
                     <Heading fontSize="3xl">{userDetails.name}</Heading>
-                    <Image m={4} src={userDetails.avatar_url} alt={`${userDetails.name}'s avatar`} /> 
+                    <Image m={4} maxH="200px" maxW="200px" src={userDetails.avatar_url} alt={`${userDetails.name}'s avatar`} /> 
                     <Heading mt={4} as="h3" fontSize="2xl" >Your Posts</Heading>
                     <Flex wrap="wrap" justify="center" >
                         {usersStories &&

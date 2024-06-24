@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
+import { Link as ReactRouterLink } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
-import { Button, Flex, Heading, Text, SkipNavContent } from "@chakra-ui/react";
+import { Button, Flex, Heading, Text, SkipNavContent, Link as ChakraLink } from "@chakra-ui/react";
 import LoginForm from "../components/forms/LoginForm";
 
 const Login = () => {
@@ -29,7 +30,7 @@ const Login = () => {
                 {loginIsVisible && <LoginForm setLoginIsVisible={setLoginIsVisible} setSuccessMessage={setSuccessMessage} />}
                 {successMessage && 
                     <>
-                        <Text mt={4} >You are logged in as {loggedInUser}.</Text>
+                        <Text mt={4} >You are logged in as {loggedInUser}. <ChakraLink as={ReactRouterLink} to="/profile" >Go to profile</ChakraLink>. </Text>
                         <Text mt={2}>Not you?</Text>
                         <Button size="sm" colorScheme="teal" mt={2} onClick={handleLogoutClick} >Logout</Button>
                     </>
