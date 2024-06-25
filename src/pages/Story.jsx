@@ -1,10 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import {
-    Flex,
-    Spinner,
-    SkipNavContent
-} from "@chakra-ui/react";
+import { Flex, Spinner, SkipNavContent } from "@chakra-ui/react";
 import { fetchArticleById, deleteArticle } from "../utils/api";
 import UserContext from "../contexts/UserContext";
 import PageNotFound from "../components/PageNotFound";
