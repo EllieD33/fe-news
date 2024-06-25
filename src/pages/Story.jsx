@@ -1,26 +1,13 @@
 import { useEffect, useState, useContext } from "react";
-import { useParams, Link as ReactRouterLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
-    Heading,
     Flex,
-    Text,
-    Box,
-    Icon,
-    Link as ChakraLink,
     Spinner,
-    IconButton,
-    Image,
     SkipNavContent
 } from "@chakra-ui/react";
-import { FaRegCommentAlt } from "react-icons/fa";
-import { GrShareOption } from "react-icons/gr";
 import { fetchArticleById, deleteArticle } from "../utils/api";
-import { formatDate, capitaliseFirstLetter } from "../utils/helpers";
 import UserContext from "../contexts/UserContext";
-import VoteForm from "../components/forms/VoteForm";
 import PageNotFound from "../components/PageNotFound";
-import Share from "../components/Share";
-import DeleteButton from "../components/DeleteButton";
 import CommentThread from "../components/CommentThread";
 import DeleteConfirmation from "../components/DeleteConfirmation";
 import FullStory from "../components/cards/FullStory";
