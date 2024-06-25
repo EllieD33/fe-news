@@ -7,13 +7,11 @@ Check out the backend repository [here](https://github.com/EllieD33/news-site).
 
 ## Live Demo
 The site is live on [Netlify](https://newshub2024.netlify.app/).
-For demonstration purposes, a logged-in user is hardcoded into the application.
 
 ### Overview
 NewsHub allows users to browse news stories with filtering and sorting options. Similar to platforms like Reddit, users can vote on stories and leave comments.
 
 ## Getting started
-
 Follow these steps to set up and run the project locally.
 
 ### Prerequisites
