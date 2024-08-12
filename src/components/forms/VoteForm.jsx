@@ -13,22 +13,35 @@ const VoteForm = ({ story, setStory }) => {
 
     useEffect(() => {
         if (loggedInUser) {
-            const votes = JSON.parse(localStorage.getItem('userVotes')) || {};
-            const userVote = votes[`${loggedInUser.username}_${story.article_id}`];
+            const userVote = getUserVote();
             if (userVote !== undefined) {
                 setCurrentVote(userVote);
             }
         }
     }, [loggedInUser, story.article_id]);
 
-    const handleVote = (event) => {
-        event.preventDefault();
+    const getUserVote = () => {
+        const votes = JSON.parse(localStorage.getItem('userVotes')) || {};
+        return votes[`${loggedInUser.username}_${story.article_id}`];
+    };
 
+    const updateLocalVotes = (newVote) => {
+        const votes = JSON.parse(localStorage.getItem('userVotes')) || {};
+        const voteKey = `${loggedInUser.username}_${story.article_id}`;
+
+        if (newVote === 0) {
+            delete votes[voteKey];
+        } else {
+            votes[voteKey] = newVote;
+        }
+        localStorage.setItem('userVotes', JSON.stringify(votes));
+    };
+
+    const handleVote = (voteType) => {
         if (isVoting) return;
-
         setIsVoting(true);
-        const voteType = event.currentTarget.name === 'upVote' ? 1 : -1;
-        let newVote = currentVote === voteType ? 0 : voteType;
+        
+        const newVote = currentVote === voteType ? 0 : voteType;
         const voteDifference = newVote - currentVote;
         const originalVotes = story.votes;
 
@@ -41,25 +54,27 @@ const VoteForm = ({ story, setStory }) => {
         updateArticleVotes(story.article_id, voteDifference).then((updatedStory) => {
             const { article } = updatedStory;
             setStory({ ...article, comment_count: commentCount });
-            
-            const votes = JSON.parse(localStorage.getItem('userVotes')) || {};
-            if (newVote === 0) {
-                delete votes[`${loggedInUser.username}_${story.article_id}`];
-            } else {
-                votes[`${loggedInUser.username}_${story.article_id}`] = newVote;
-            }
-            localStorage.setItem('userVotes', JSON.stringify(votes));
+            updateLocalVotes(newVote);
         }).catch((error) => {
-            setCurrentVote(currentVote);
-            setStory(prevStory => ({
-                ...prevStory,
-                votes: originalVotes
-            }));
-            alert('Failed to update votes. Please try again.');
+            revertVoteChanges(originalVotes);
         }).finally(() => {
             setIsVoting(false);
         });
     }
+
+    const revertVoteChanges = (originalVotes) => {
+        setCurrentVote(currentVote);
+        setItem(prevItem => ({
+            ...prevItem,
+            votes: originalVotes
+        }));
+        toast({
+            title: "Failed to update votes. Please try again.",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+        });
+    };
 
     const handleClick = (event) => {
         if (!loggedInUser) {
@@ -71,7 +86,8 @@ const VoteForm = ({ story, setStory }) => {
             });
             event.preventDefault();
         } else {
-            handleVote(event);
+            const voteType = event.currentTarget.name === 'upVote' ? 1 : -1;
+            handleVote(voteType);
         }
     };
 
