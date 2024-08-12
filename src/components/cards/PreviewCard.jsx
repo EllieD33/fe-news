@@ -15,7 +15,7 @@ const PreviewCard = ({ article }) => {
     };
 
     return (
-        <Card as="article" w={[300, 400, 500]} boxShadow="0px 6px 8px 0px rgba(40, 94, 97, 1)" display="flex" justify="space-around" minW="300px" minH="192px" m={4} transition="all 0.2s" _hover={{ transform: "translateY(-4px)", boxShadow: "0px 10px 15px 0px rgba(40, 94, 97, 1)" }} >
+        <Card as="article" w={{base: 300, md: 500}} boxShadow="0px 6px 8px 0px rgba(40, 94, 97, 1)" display="flex" justify="space-around" minW="300px" minH="192px" m={4} transition="all 0.2s" _hover={{ transform: "translateY(-4px)", boxShadow: "0px 10px 15px 0px rgba(40, 94, 97, 1)" }} >
             <Flex direction={{ base: "column", md: "row" }}>
                 <Image src={article_img_url} alt="image related to article" borderRadius={{ base: "5px 5px 0 0", md: "5px 0 0 5px" }} objectFit='cover' w={{ base: "300px", md: "200px" }} h={{ base: "200px", md: "200px" }} />
                 <Flex w="100%" direction="column" justifyContent="center" ml={2} px={3} pt={1} >
