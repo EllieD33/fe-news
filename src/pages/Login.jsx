@@ -30,7 +30,7 @@ const Login = () => {
                 {loginIsVisible && <LoginForm setLoginIsVisible={setLoginIsVisible} setSuccessMessage={setSuccessMessage} />}
                 {successMessage && 
                     <>
-                        <Text mt={4} >You are logged in as {loggedInUser}. <ChakraLink as={ReactRouterLink} to="/profile" >Go to profile</ChakraLink>. </Text>
+                        <Text mt={4} >You are logged in as {loggedInUser}. <ChakraLink as={ReactRouterLink} color="teal.600" fontWeight="bold" to="/profile" >Go to profile</ChakraLink>. </Text>
                         <Text mt={2}>Not you?</Text>
                         <Button size="sm" colorScheme="teal" mt={2} onClick={handleLogoutClick} >Logout</Button>
                     </>
