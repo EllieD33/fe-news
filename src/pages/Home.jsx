@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Flex, Text, Heading, SkipNavContent } from "@chakra-ui/react";
+import { Flex, Text, Heading, SkipNavContent, Spinner } from "@chakra-ui/react";
 import { fetchAllArticles } from "../utils/api";
 import FeaturedStories from "../components/containers/FeaturedStories";
 
@@ -9,23 +9,21 @@ const Home = () => {
     const [mostPopularStories, setMostPopularStories] = useState([])
 
     useEffect(() => {
-        fetchAllArticles(null, "created_at", "DESC", 3).then(({ articles }) => {
-            setRecentStories(articles);
-            setIsLoading(false);
-        }).catch(error => {
-            console.error('Error fetching articles:', error);
-            setIsLoading(false);
-        });
-    }, [])
+        const recentStoriesPromise = fetchAllArticles(null, "created_at", "DESC", 3).then(({ articles }) => articles);
+        
+        const popularStoriesPromise = fetchAllArticles(null, "votes", "DESC", 3).then(({ articles }) => articles);
 
-    useEffect(() => {
-        fetchAllArticles(null, "votes", "DESC", 3).then(({ articles }) => {
-            setMostPopularStories(articles);
-            setIsLoading(false);
-        }).catch(error => {
-            console.error('Error fetching articles:', error);
-            setIsLoading(false);
-        });
+        Promise.all([recentStoriesPromise, popularStoriesPromise])
+            .then(([recentArticles, popularArticles]) => {
+                setRecentStories(recentArticles);
+                setMostPopularStories(popularArticles);
+            })
+            .catch(error => {
+                console.error('Error fetching articles:', error);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
     }, [])
 
     return (
@@ -36,10 +34,12 @@ const Home = () => {
                     <Heading fontSize="3xl" textAlign="center">Welcome to NewsHub</Heading>
                     <Text mx={2} textAlign="center">Enjoy your time here, and remember: It's nice to be nice!!!</Text>
                 </section>
+                {isLoading ? <Spinner /> :
                 <Flex wrap="wrap" align="flex-start" justify="center">
-                    <FeaturedStories title="What's new" subtitle="Recently added stories" stories={recentStories} isLoading={isLoading} />
-                    <FeaturedStories title="Trending" subtitle="Most popular stories" stories={mostPopularStories} isLoading={isLoading} />
+                    <FeaturedStories title="What's new" subtitle="Recently added stories" stories={recentStories} />
+                    <FeaturedStories title="Trending" subtitle="Most popular stories" stories={mostPopularStories} />
                 </Flex>
+                }
             </Flex>
         </>
     )
