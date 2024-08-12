@@ -15,6 +15,7 @@ const FullStory = ({ story, setStory, loggedInUser, onDelete, isDeleting, errors
             direction="column"
             m={4}
             maxW="70%"
+            minW="320px"
             alignItems="center"
         >
             <Heading mb={2} fontSize={ {base: "2xl", sm: "3xl"}} textAlign="center">
@@ -41,8 +42,8 @@ const FullStory = ({ story, setStory, loggedInUser, onDelete, isDeleting, errors
                     {errors.deleteFailed && <Text fontSize="sm" color="red" >{errors.deleteFailed}</Text> }
                 </Flex>
             }
-            <Image maxW="500px" src={story.article_img_url} alt="Image relating to story" />
-            <Text my={2} maxW="80%" minW="320px">
+            <Image maxW="500px" src={story.article_img_url} alt="Image relating to story" borderRadius={5} boxShadow="0 2px 4px rgba(0, 0, 0, 0.2)" />
+            <Text my={2} maxW="500px" minW="320px">
                 {story.body}
             </Text>
             <Flex w="100%" justify="space-around" align="center">
