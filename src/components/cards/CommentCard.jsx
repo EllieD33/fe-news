@@ -57,7 +57,6 @@ const CommentCard = ({ comment, setComments, comments }) => {
                     setEntity={setComments}
                     updateVotesApi={updateCommentVotes}
                 />
-                <Text>Votes: {comment.votes}</Text>
                 {loggedInUser && loggedInUser.username === comment.author ? (
                     <DeleteButton
                         thingBeingDeleted={"comment"}
