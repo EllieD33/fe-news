@@ -1,4 +1,4 @@
-import { Card, Heading, Image, Text, Flex, Link as ChakraLink, Icon, Tooltip } from "@chakra-ui/react"
+import { Card, Image, Text, Flex, Link as ChakraLink, Icon, Tooltip } from "@chakra-ui/react"
 import { FaRegCommentAlt,  } from "react-icons/fa";
 import { TiArrowDownOutline, TiArrowUpOutline, TiMinusOutline } from "react-icons/ti";
 import { Link as ReactRouterLink } from "react-router-dom";
