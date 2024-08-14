@@ -1,3 +1,4 @@
+import { useRef, useEffect, useState } from "react";
 import { Card, Image, Text, Flex, Link as ChakraLink, Icon, Tooltip } from "@chakra-ui/react"
 import { FaRegCommentAlt,  } from "react-icons/fa";
 import { TiArrowDownOutline, TiArrowUpOutline, TiMinusOutline } from "react-icons/ti";
@@ -7,6 +8,16 @@ import InternalLink from "../InternalLink";
 
 const PreviewCard = ({ article }) => {
     const { article_id, title, article_img_url, topic, author, created_at, votes, comment_count } = article;
+
+    const titleRef = useRef(null);
+    const [isClamped, setIsClamped] = useState(false);
+
+    useEffect(() => {
+        if(titleRef.current){
+            const isTitleClamped = titleRef.current.scrollHeight > titleRef.current.clientHeight;
+            setIsClamped(isTitleClamped);
+        }
+    }, [title]);
 
     const getVoteIcon = (votes) => {
         if (votes > 0) return TiArrowUpOutline;
@@ -19,28 +30,29 @@ const PreviewCard = ({ article }) => {
             <Flex direction={{ base: "column", md: "row" }}>
                 <Image src={article_img_url} alt="image related to article" borderRadius={{ base: "5px 5px 0 0", md: "5px 0 0 5px" }} objectFit='cover' w={{ base: "300px", md: "200px" }} h={{ base: "200px", md: "200px" }} />
                 <Flex w="100%" direction="column" justifyContent="center" ml={2} px={3} pt={1} >
-                <Tooltip label={title} hasArrow placement="top">
-                    <Text
-                        fontSize="xl"
-                        fontWeight="bold"
-                        as="h4"
-                        mb={1}
-                        maxW="250px"
-                        overflow="hidden"
-                        whiteSpace="normal"
-                        display="-webkit-box"
-                        WebkitBoxOrient="vertical"
-                        WebkitLineClamp={2}
-                        sx={{
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            WebkitBoxOrient: "vertical",
-                            display: "-webkit-box",
-                            WebkitLineClamp: 2,
-                            lineClamp: 2
-                        }}
-                    >{title}</Text>
-                </Tooltip>
+                    <Tooltip label={title} hasArrow placement="auto" isDisabled={!isClamped}>
+                        <Text
+                            ref={titleRef}
+                            fontSize="xl"
+                            fontWeight="bold"
+                            as="h4"
+                            mb={1}
+                            maxW="250px"
+                            overflow="hidden"
+                            whiteSpace="normal"
+                            display="-webkit-box"
+                            webkitboxorient="vertical"
+                            webkitlineclamp={2}
+                            sx={{
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                WebkitBoxOrient: "vertical",
+                                display: "-webkit-box",
+                                WebkitLineClamp: 2,
+                                lineClamp: 2
+                            }}
+                        >{title}</Text>
+                    </Tooltip>
                     <Flex alignItems="center" justify="space-between" flexDirection={{ base: "column", md: "row" }}>
                         <Flex w="100%" align="center">
                             <Flex w="100%" direction="column" >
