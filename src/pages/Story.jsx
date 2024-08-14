@@ -62,7 +62,7 @@ const Story = () => {
             <SkipNavContent />
             <Flex m={4} as="main" direction="column" align="center">
                 {storyDeleted && <DeleteConfirmation/>}
-                {isLoading && <Spinner />}
+                {isLoading && <Spinner size='xl' color='teal.700' my={50} />}
                 {!isLoading && !storyDeleted &&
                     <>
                         <FullStory story={story} setStory={setStory} loggedInUser={loggedInUser} onDelete={onDelete} isDeleting={isDeleting} errors={errors} handleShareClick={handleShareClick} shareIconsVisible={shareIconsVisible} articleUrl={articleUrl} />

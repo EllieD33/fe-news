@@ -47,7 +47,7 @@ const AllTopics = () => {
                             )}
                 {newTopicFormIsVisible && <NewTopicForm topics={topics} setTopics={setTopics} setNewTopicFormIsVisible={setNewTopicFormIsVisible} setShowTopicFormButton={setShowTopicFormButton} setSuccessMessage={setSuccessMessage} />}
                 {successMessage && <Text m={2} >Topic added successfully!</Text>}
-                {isLoading ? <Spinner/> :
+                {isLoading ? <Spinner size='xl' color='teal.700' my={50} /> :
                     topics.map((topic) => (
                         <TopicCard topic={topic.slug} key={topic.slug} description={topic.description} />
                     ))

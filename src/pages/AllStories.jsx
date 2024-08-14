@@ -37,7 +37,7 @@ const AllStories = () => {
             <Flex as="main" pt={4} direction="column" alignItems="center" >
                 <Heading>Stories</Heading>
                 <InternalLink to="/stories/post-story" ariaLabel="Post a story" text="Post a story"/>
-                {isLoading ? <Spinner/> :
+                {isLoading ? <Spinner size='xl' color='teal.700' my={50} /> :
                 (
                     <>
                         {showTopicFilter && <TopicFilter onTopicChange={handleTopicChange} />}

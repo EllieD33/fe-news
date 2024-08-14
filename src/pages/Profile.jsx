@@ -39,7 +39,7 @@ const Profile = () => {
         <>
             <SkipNavContent />
             <Flex as="main" mt={4} justify="center" direction="column" align="center" >
-                {loggedInUser && isLoading && <Spinner/>}
+                {loggedInUser && isLoading && <Spinner size='xl' color='teal.700' my={50} />}
                 {!loggedInUser && <Text mt={10} >You are not logged in. Please <ChakraLink as={ReactRouterLink} color="teal.600" fontWeight="bold" to="/login">log in</ChakraLink> to view you profile.</Text>}
                 {!isLoading && loggedInUser &&
                     <>
