@@ -44,10 +44,13 @@ const CommentCard = ({ comment, setComments, comments }) => {
             maxW="480px"
             width={{ base: "100%", sm: "350px", md: "480px" }}
         >
-            <Heading as="h4" fontSize="md">
-                {comment.author} on {formatDate(comment.created_at)} at{" "}
-                {formatTime(comment.created_at)}
-            </Heading>
+            <Flex flexDirection="row">
+                <Heading as="h4" fontSize="md" pt={1}>
+                    {comment.author}
+                </Heading>
+                <Text fontWeight="light" pl={2}>on {formatDate(comment.created_at)} at{" "}
+                {formatTime(comment.created_at)}</Text>
+            </Flex>
             <Text my={2}>{comment.body}</Text>
             <Flex justify="space-between" align="center">
                 <VoteForm
