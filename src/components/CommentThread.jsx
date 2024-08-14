@@ -50,6 +50,7 @@ const CommentThread = ({ article_id }) => {
             </Heading>
             {showCommentFormButton && (
                 <Button
+                    my={2}
                     w="150px"
                     leftIcon={<Icon as={AddIcon} />}
                     size="sm"
