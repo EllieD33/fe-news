@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Flex, Text, Heading, SkipNavContent, Spinner } from "@chakra-ui/react";
+import { Flex, Text, Heading, SkipNavContent, Spinner, Divider } from "@chakra-ui/react";
 import { fetchAllArticles } from "../utils/api";
 import FeaturedStories from "../components/containers/FeaturedStories";
 
@@ -37,6 +37,7 @@ const Home = () => {
                     <Heading fontSize="3xl" textAlign="center">Welcome to NewsHub</Heading>
                     <Text mx={2} textAlign="center">Enjoy your time here, and remember: It's nice to be nice!!!</Text>
                 </section>
+                <Divider my={6} />
                 {isLoading ? <Spinner size='xl' color='teal.700' my={50} /> :
                 error ? (
                     <Text my={50} fontSize="xl" textAlign="center" >{error}</Text>
