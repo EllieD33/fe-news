@@ -64,8 +64,8 @@ const VoteForm = ({ story, setStory }) => {
 
     const revertVoteChanges = (originalVotes) => {
         setCurrentVote(currentVote);
-        setItem(prevItem => ({
-            ...prevItem,
+        setStory(prevStory => ({
+            ...prevStory,
             votes: originalVotes
         }));
         toast({
