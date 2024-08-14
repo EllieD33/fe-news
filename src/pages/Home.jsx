@@ -37,7 +37,7 @@ const Home = () => {
                     <Heading fontSize="3xl" textAlign="center">Welcome to NewsHub</Heading>
                     <Text mx={2} textAlign="center">Enjoy your time here, and remember: It's nice to be nice!!!</Text>
                 </section>
-                {isLoading ? <Spinner /> :
+                {isLoading ? <Spinner size='xl' color='teal.700' my={50} /> :
                 error ? (
                     <Text my={50} fontSize="xl" textAlign="center" >{error}</Text>
                 ) : (
