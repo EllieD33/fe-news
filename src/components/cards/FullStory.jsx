@@ -6,7 +6,7 @@ import DeleteButton from "../DeleteButton";
 import VoteForm from "../forms/VoteForm";
 import Share from "../Share";
 import { formatDate, capitaliseFirstLetter } from "../../utils/helpers";
-
+import { updateArticleVotes } from "../../utils/api";
 
 const FullStory = ({ story, setStory, loggedInUser, onDelete, isDeleting, errors, handleShareClick, shareIconsVisible, articleUrl }) => {
     return (
@@ -47,7 +47,14 @@ const FullStory = ({ story, setStory, loggedInUser, onDelete, isDeleting, errors
                 {story.body}
             </Text>
             <Flex w="100%" justify="space-around" align="center">
-                <VoteForm story={story} setStory={setStory} />
+                <VoteForm 
+                    entityType="article"
+                    entityId={story.article_id}
+                    entityVotes={story.votes}
+                    setEntity={setStory}
+                    updateVotesApi={updateArticleVotes}
+                    commentCount={story.comment_count}
+                />
                 <Flex align="center">
                     <Icon as={FaRegCommentAlt} color="teal.700" />
                     <Text pl={2}>{`${story.comment_count}`}</Text>

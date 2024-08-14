@@ -4,7 +4,8 @@ import { useContext, useState } from "react";
 import { formatDate, formatTime } from "../../utils/helpers";
 import { deleteComment } from "../../utils/api";
 import DeleteButton from "../DeleteButton";
-import CommentVoteForm from "../forms/CommentVoteForm";
+import VoteForm from "../forms/VoteForm";
+import { updateCommentVotes } from "../../utils/api";
 
 const CommentCard = ({ comment, setComments, comments }) => {
     const { loggedInUser } = useContext(UserContext);
@@ -49,10 +50,20 @@ const CommentCard = ({ comment, setComments, comments }) => {
             </Heading>
             <Text my={2}>{comment.body}</Text>
             <Flex justify="space-between" align="center">
-                <CommentVoteForm comment={comment} setComments={setComments}/>
+                <VoteForm
+                    entityType="comment"
+                    entityId={comment.comment_id}
+                    entityVotes={comment.votes}
+                    setEntity={setComments}
+                    updateVotesApi={updateCommentVotes}
+                />
                 <Text>Votes: {comment.votes}</Text>
                 {loggedInUser && loggedInUser.username === comment.author ? (
-                    <DeleteButton thingBeingDeleted={'comment'} onDelete={onDelete} isDeleting={isDeleting} />
+                    <DeleteButton
+                        thingBeingDeleted={"comment"}
+                        onDelete={onDelete}
+                        isDeleting={isDeleting}
+                    />
                 ) : null}
             </Flex>
             {errors.deleteComment && (
