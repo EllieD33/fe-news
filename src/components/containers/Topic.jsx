@@ -36,7 +36,7 @@ const Topic = ({ topic, setStories, stories }) => {
                 <SortForm setSearchParams={setSearchParams} />
             </Flex>
             <Flex flex={1} wrap="wrap" align="center" justify="center" >
-                {isLoading ? <Spinner/> :
+                {isLoading ? <Spinner size='xl' color='teal.700' my={50} /> :
                     stories.map((article) => (
                         <PreviewCard key={article.article_id} article={article} />
                     ))
