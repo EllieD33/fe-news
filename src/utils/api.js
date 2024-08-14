@@ -56,6 +56,13 @@ export const addComment = (article_id, username, body) => {
     });
 }
 
+export const updateCommentVotes = (comment_id, votes) => {
+    return newsApi.patch(`/comments/${comment_id}`, {inc_votes: votes}).then(({ data }) => data)
+    .catch(error => {
+        throw error;
+    })
+}
+
 export const deleteComment = (comment_id) => {
     return newsApi.delete(`/comments/${comment_id}`)
     .catch(error => {
