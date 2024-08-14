@@ -54,7 +54,7 @@ const NewCommentForm = ({ setComments, comments, article_id, setCommentFormIsVis
             {errors.commentTextInput && <Text fontSize="sm" color="red">{errors.commentTextInput}</Text>}
             <Flex justify="space-between">
                 <Button mt={1} type="submit" colorScheme="teal" size="sm" >{isLoading ? 'Adding...' : 'Add'}</Button>
-                <Button mt={1} onClick={handleCloseClick} colorScheme="teal" size="sm" >Close</Button>
+                <Button mt={1} onClick={handleCloseClick} colorScheme="teal" size="sm" variant="outline" >Close</Button>
             </Flex>
         </Box>
     )
